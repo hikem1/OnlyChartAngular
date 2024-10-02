@@ -1,0 +1,12 @@
+header{
+    background-color: #f8f8f8;    
+    img{
+        width: auto;
+        height: 80px;
+    }
+    a{
+        &:hover{
+            font-weight: bold;
+        }   
+    }
+}
