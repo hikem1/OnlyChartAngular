@@ -1,0 +1,18 @@
+[
+    {
+        "id": 4646,
+        "name": "ORANGE",
+        "code": "ORA",
+        "graph_link": null,
+        "link": "/cours/action/ORANGE-4649/",
+        "exchange_place": "Euronext Paris"
+    },
+    {
+        "id": 29421303,
+        "name": "ORANGE",
+        "code": "FTE",
+        "graph_link": null,
+        "link": "/cours/action/ORANGE-29421303/",
+        "exchange_place": "LIQUIDNET SYSTEMS"
+    }
+]
