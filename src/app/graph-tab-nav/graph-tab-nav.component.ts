@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Instrument } from '../models/instrument';
 
 @Component({
   selector: 'app-graph-tab-nav',
@@ -7,6 +8,7 @@ import { Component } from '@angular/core';
   templateUrl: './graph-tab-nav.component.html',
   styleUrl: './graph-tab-nav.component.scss'
 })
-export class GraphTabNavComponent {
 
+export class GraphTabNavComponent {
+  @Input() instrument!: Instrument
 }

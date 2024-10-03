@@ -14,7 +14,7 @@ export class Instrument implements InstrumentInterface{
     graph_link: string|null;
     link: string;
     exchange_place: string
-    
+
     constructor(instrumentJson: InstrumentInterface){
         this.id = instrumentJson.id;
         this.name = instrumentJson.name;
