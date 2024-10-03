@@ -39,4 +39,34 @@ header{
             animation: scale-up-center 0.2s both;
         }   
     }
+    [data-bs-toggle]{
+        border: none;
+        i{
+            color: rgb(236, 103, 87);
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    header{
+        img{
+            position: absolute;
+            top: 0px;
+            right: 10px;
+        }
+        a{
+            animation: none;
+            &:hover{
+                animation: none;
+            }   
+        }
+        #navbarSupportedContent{
+            border-top: 1px solid rgb(236, 103, 87, 0.2);
+            margin: 10px 0 10px 0;
+        }
+        form{
+            width: 50%;
+        }
+
+    }
 }
