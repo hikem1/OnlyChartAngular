@@ -1,12 +1,42 @@
+@keyframes scale-up-center {
+    0% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+    100% {
+      -webkit-transform: scale(1.2);
+              transform: scale(1.2);
+              text-shadow: 1px 1px 1px rgb(236, 103, 87, 0.5);
+    }
+}
+
+@keyframes scale-down-center {
+    0% {
+      -webkit-transform: scale(1.2);
+              transform: scale(1.2);
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
+  
 header{
-    background-color: #f8f8f8;    
     img{
         width: auto;
-        height: 80px;
+        height: 50px;
+        cursor: pointer;
+        animation: scale-down-center 0.2s both;
+        &:hover{
+            animation: scale-up-center 0.2s both;
+        }
     }
     a{
+        animation: scale-down-center 0.2s both;
+        color: rgb(236, 103, 87) !important;
         &:hover{
             font-weight: bold;
+            animation: scale-up-center 0.2s both;
         }   
     }
 }
