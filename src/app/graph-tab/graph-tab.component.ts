@@ -1,17 +1,21 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Instrument } from '../models/instrument';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-graph-tab',
   standalone: true,
-  imports: [],
+  imports: [
+    NgClass
+  ],
   templateUrl: './graph-tab.component.html',
   styleUrl: './graph-tab.component.scss'
 })
+
 export class GraphTabComponent implements OnInit{
-  urlSafe!: SafeResourceUrl;
   @Input() instrument!: Instrument
+  urlSafe!: SafeResourceUrl;
 
   constructor(private domSanitizer: DomSanitizer){
   }
