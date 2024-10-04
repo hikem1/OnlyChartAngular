@@ -1,4 +1,4 @@
-<button class="d-flex p-0 nav-link border ms-1" id="" data-bs-toggle="tab" [attr.data-bs-target]="instrument.id" type="button" role="tab" aria-controls="" aria-selected="true">
+<button class="d-flex p-0 nav-link border ms-1" [ngClass]="{active: instrument.active}" (click)="onActiveTab(instrument)" type="button" role="tab">
     <i class="bi bi-star px-2 py-2"></i>
     <span class="py-2 p pe-2">{{ instrument.name }}</span>
     <i class="px-1 bi bi-x"></i>
