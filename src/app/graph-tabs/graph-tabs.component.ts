@@ -14,13 +14,11 @@ import { Instrument } from '../models/instrument';
   templateUrl: './graph-tabs.component.html',
   styleUrl: './graph-tabs.component.scss'
 })
-export class GraphTabsComponent implements OnInit{
+
+export class GraphTabsComponent {
   instruments: Instrument[] = []
 
   constructor(private instrumentService: InstrumentService){
-    this.instrumentService = instrumentService
-  }
-  ngOnInit(): void {
     this.instruments = this.instrumentService.getInstruments();
   }
 }
