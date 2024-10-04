@@ -5,17 +5,26 @@ import instruments from '../../../public/assets/fixtures/instruments.json';
 @Injectable({
   providedIn: 'root'
 })
+
 export class InstrumentService {
   private instruments: Instrument[] = []
 
-  constructor() { 
+  constructor(){
     instruments.forEach(instrument => 
       this.instruments.push(new Instrument(instrument))
     )
-    console.log(this.instruments);
-    
   }
   getInstruments(): Instrument[]{
     return [...this.instruments]
   }
+  setActiveInstrument(activeInstrument: Instrument): void{
+    this.instruments.forEach(instrument => {
+      if(activeInstrument.id !== instrument.id){
+        instrument.active = false
+      }else{
+        instrument.active = true
+      }
+    })
+  }
+
 }
