@@ -7,7 +7,7 @@ import { NgClass } from '@angular/common';
   selector: 'app-graph-tab',
   standalone: true,
   imports: [
-    NgClass
+    NgClass,
   ],
   templateUrl: './graph-tab.component.html',
   styleUrl: './graph-tab.component.scss'

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { GraphTabComponent } from '../graph-tab/graph-tab.component';
 import { GraphTabNavComponent } from '../graph-tab-nav/graph-tab-nav.component';
 import { InstrumentService } from '../services/instrument.service';
