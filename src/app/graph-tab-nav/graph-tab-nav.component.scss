@@ -1,0 +1,13 @@
+.nav-link{
+    font-size: 0.7rem !important;
+    background: #f8f9fa !important;
+    color: #4b4a4a;
+}
+.active{
+    font-weight: bold !important;
+    border-right: 2px solid #76cf62 !important;
+    border-left: 2px solid #76cf62 !important;
+    border-top: 2px solid #76cf62 !important;
+    background: #ffffff !important;
+    transition-duration: 0.2s;
+}
