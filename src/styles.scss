@@ -1,11 +1,10 @@
-@font-face {
-    font-family: 'Quicksand';
-    src: url('/assets/font/Quicksand-VariableFont_wght.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
+@import 'bootstrap.overide';
+@import 'animations';
+@import 'fonts';
+@import '../node_modules/bootstrap/scss/bootstrap';
+
 * {
-    font-family: "Quicksand";
+    font-family: $quicksand;
 }
 body{
     display: flex;
@@ -16,4 +15,7 @@ body{
     display: flex;
     flex-direction: column;
     flex: 1
+}
+.bb{
+    border-bottom: 1px solid rgb(236, 103, 87, 0.2);
 }
