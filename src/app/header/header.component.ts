@@ -14,7 +14,6 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 export class HeaderComponent {
   
   constructor(private router: Router){
-
   }
   onLogoClick(): void{
     this.router.navigateByUrl("");

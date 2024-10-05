@@ -5,8 +5,10 @@
         }
     </div>
 </nav>
-<div class="tab-content" id="nav-tabContent">
+<div class="tab-content fullHeight" id="nav-tabContent">
     @for (instrument of instruments; track instrument.id) {
-        <app-graph-tab [instrument]="instrument"></app-graph-tab>
+        @if (instrument.active) {
+            <app-graph-tab [instrument]="instrument" class="fullHeight"></app-graph-tab>
+        }
     }
 </div>
