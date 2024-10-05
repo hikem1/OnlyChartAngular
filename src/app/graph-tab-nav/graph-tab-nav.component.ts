@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Instrument } from '../models/instrument';
 import { GraphTabComponent } from '../graph-tab/graph-tab.component';
 import { NgClass, TitleCasePipe } from '@angular/common';
@@ -17,13 +17,16 @@ import { InstrumentService } from '../services/instrument.service';
 
 export class GraphTabNavComponent {
   @Input() instrument!: Instrument
-  graphTabComponent!: GraphTabComponent;
-  
+  @Output() close = new EventEmitter<void>();
+
   constructor(private instrumentservice: InstrumentService){
 
   }
   onActiveTab(instrument: Instrument): void{
     this.instrumentservice.setActiveInstrument(instrument);
+  }
+  onCloseTab(): void {
+    this.close.emit();
   }
 }
 

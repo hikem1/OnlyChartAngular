@@ -21,4 +21,7 @@ export class GraphTabsComponent {
   constructor(private instrumentService: InstrumentService){
     this.instruments = this.instrumentService.getInstruments();
   }
+  closeTab(instrument: Instrument) {
+    this.instruments = this.instruments.filter(instr => instr.id !== instrument.id);
+  }
 }
