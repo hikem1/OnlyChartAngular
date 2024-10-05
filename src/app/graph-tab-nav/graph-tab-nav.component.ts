@@ -1,9 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Instrument } from '../models/instrument';
-import { GraphTabComponent } from '../graph-tab/graph-tab.component';
 import { NgClass, TitleCasePipe } from '@angular/common';
 import { InstrumentService } from '../services/instrument.service';
-
+import { LocalStorageService } from '../services/local-storage.service';
 @Component({
   selector: 'app-graph-tab-nav',
   standalone: true,
@@ -18,6 +17,7 @@ import { InstrumentService } from '../services/instrument.service';
 export class GraphTabNavComponent {
   @Input() instrument!: Instrument
   @Output() close = new EventEmitter<void>();
+  private readonly localStorageService = inject(LocalStorageService);
 
   constructor(private instrumentservice: InstrumentService){
 
@@ -27,6 +27,9 @@ export class GraphTabNavComponent {
   }
   onCloseTab(): void {
     this.close.emit();
+  }
+  onStar(instrument: Instrument): void{
+    this.localStorageService.set("instruments", instrument.name)
   }
 }
 
