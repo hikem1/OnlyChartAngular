@@ -15,13 +15,16 @@ import { Instrument } from '../models/instrument';
   styleUrl: './graph-tabs.component.scss'
 })
 
-export class GraphTabsComponent {
+export class GraphTabsComponent{
   instruments: Instrument[] = []
 
   constructor(private instrumentService: InstrumentService){
     this.instruments = this.instrumentService.getInstruments();
   }
-  closeTab(instrument: Instrument) {
+  closeTab(instrument: Instrument): void {
     this.instruments = this.instruments.filter(instr => instr.id !== instrument.id);
+  }
+  toggleFavorite(instrument: Instrument): void{
+    instrument.favorite = instrument.favorite ? false : true;
   }
 }

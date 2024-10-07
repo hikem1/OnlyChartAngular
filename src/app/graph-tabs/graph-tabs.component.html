@@ -2,7 +2,7 @@
     <nav class="bg-light">
         <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
             @for (instrument of instruments; track instrument.id) {
-                <app-graph-tab-nav [instrument]="instrument" (close)="closeTab(instrument)"></app-graph-tab-nav>
+                <app-graph-tab-nav [instrument]="instrument" (close)="closeTab(instrument)" (favorite)="toggleFavorite(instrument)"></app-graph-tab-nav>
             }
         </div>
     </nav>
