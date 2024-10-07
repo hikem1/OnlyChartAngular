@@ -8,14 +8,19 @@ import { DOCUMENT } from '@angular/common';
 export class LocalStorageService {
   private readonly localStorage = inject(DOCUMENT)?.defaultView?.localStorage;
 
-  get<T>(key: string): T | null {
+  get(key: string): any {
     const item = this.localStorage?.getItem(key);
     if (!item) {
-      return null;
+      return [];
     }
-    return this.isJSONValid(item) ? (JSON.parse(item) as T) : (item as T);
+    return JSON.parse(item);
   }
-  set(key: string, value: unknown): void {
+  add(key: string, value: any): void{
+    const storage = this.get(key);
+    storage.push(value)
+    this.set(key, storage)
+  }
+  set(key: string, value: any): void {
     this.localStorage?.setItem(key, JSON.stringify(value));
   }
   remove(key: string): void {
