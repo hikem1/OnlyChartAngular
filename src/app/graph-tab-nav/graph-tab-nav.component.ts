@@ -1,8 +1,10 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { Instrument } from '../models/instrument';
 import { NgClass, TitleCasePipe } from '@angular/common';
 import { InstrumentService } from '../services/instrument.service';
-import { LocalStorageService } from '../services/local-storage.service';
+import { FavoriteInstrumentsService } from '../services/favorite-instruments.service';
+
+FavoriteInstrumentsService
 @Component({
   selector: 'app-graph-tab-nav',
   standalone: true,
@@ -17,19 +19,23 @@ import { LocalStorageService } from '../services/local-storage.service';
 export class GraphTabNavComponent {
   @Input() instrument!: Instrument
   @Output() close = new EventEmitter<void>();
-  private readonly localStorageService = inject(LocalStorageService);
+  @Output() favorite = new EventEmitter<void>();
 
-  constructor(private instrumentservice: InstrumentService){
-
+  constructor(
+    private instrumentservice: InstrumentService,
+    private favoriteInstrumentsService: FavoriteInstrumentsService
+  ){
   }
   onActiveTab(instrument: Instrument): void{
     this.instrumentservice.setActiveInstrument(instrument);
   }
-  onCloseTab(): void {
+  onCloseTab(instrument: Instrument): void {
+    this.instrumentservice.removeInstrument(instrument);
     this.close.emit();
   }
   onStar(instrument: Instrument): void{
-    this.localStorageService.set("instruments", instrument.name)
+    this.favoriteInstrumentsService.toggleInstrument(instrument);
+    this.favorite.emit();
   }
 }
 
