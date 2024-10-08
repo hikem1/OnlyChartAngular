@@ -1,7 +1,10 @@
 header{
+    nav{
+        border-bottom: 1px solid rgb(236, 103, 87, 0.2);
+    }
     img{
         width: auto;
-        height: 60px;
+        height: 50px;
         cursor: pointer;
         animation: scale-down-center 0.2s both;
         &:hover{
@@ -22,6 +25,10 @@ header{
             color: rgb(236, 103, 87);
         }
     }
+    form{
+        max-width: 300px;
+
+    }
 }
 .active{
     font-weight: bold;
@@ -33,7 +40,7 @@ header{
         img{
             position: absolute;
             top: 0px;
-            right: 10px;
+            left: 10px;
         }
         a{
             animation: none;
@@ -42,12 +49,13 @@ header{
             }   
         }
         #navbarSupportedContent{
-            border-top: 1px solid rgb(236, 103, 87, 0.2);
+            // border-top: 1px solid rgb(236, 103, 87, 0.2);
             margin: 10px 0 10px 0;
         }
         form{
-            width: 50%;
+            width: 100%;
         }
+
 
     }
 }
