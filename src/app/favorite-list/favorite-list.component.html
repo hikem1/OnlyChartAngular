@@ -1,1 +1,26 @@
-<p>favorite-list works!</p>
+<div class="container tilt-in-top">
+    <table class="table rounded shadow">
+        <thead class="rounded">
+            <tr class="rounded">
+                <th class="rounded fav-col"></th>
+                <th class="text-secondary text-nowrap overflow-hidden">Name</th>
+                <th class="text-secondary  text-nowrap overflow-hidden">Code</th>
+                <th class="text-secondary text-nowrap overflow-hidden">Exchange Place</th>
+                <th class="rounded text-secondary text-center text-nowrap overflow-hidden">Add to home</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (favorite of favoriteInstruments; track favorite.id) {
+                @if (favorite.favorite) {
+                    <tr>
+                        <td class="fav-col text-nowrap overflow-hidden"><i class="bi py-1" [ngClass]="favorite.favorite ? 'bi-star-fill': 'bi-star'" (click)="onStar(favorite)" ></i></td>
+                        <td class=" text-nowrap overflow-hidden">{{ favorite.name | titlecase}}</td>
+                        <td class=" text-nowrap overflow-hidden">{{ favorite.code }}</td>
+                        <td class="text-nowrap overflow-hidden">{{ favorite.exchange_place | titlecase}}</td>
+                        <td><i (click)="onPlus(favorite)" class="bi bi-plus-square-fill d-flex justify-content-center py-1"></i></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

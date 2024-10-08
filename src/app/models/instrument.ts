@@ -4,8 +4,9 @@ export interface InstrumentInterface{
     code: string;
     graph_link: string|null;
     link: string;
-    exchange_place: string
+    exchange_place: string;
     active?: boolean;
+    favorite?: boolean;
 }
 
 export class Instrument implements InstrumentInterface{
@@ -15,7 +16,8 @@ export class Instrument implements InstrumentInterface{
     graph_link: string|null;
     link: string;
     exchange_place: string
-    active: boolean;
+    active?: boolean;
+    favorite?: boolean;
 
     constructor(instrumentJson: InstrumentInterface){
         this.id = instrumentJson.id;
@@ -24,6 +26,7 @@ export class Instrument implements InstrumentInterface{
         this.graph_link = instrumentJson.graph_link;
         this.link = instrumentJson.link;
         this.exchange_place = instrumentJson.exchange_place;
-        this.active = false
+        this.active = false;
+        this.favorite = false;
     }
 }
