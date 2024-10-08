@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import instruments from '../../../public/assets/fixtures/instruments.json';
+import instrumentsFixture from '../../../public/assets/fixtures/instruments.json';
 import { Instrument } from '../models/instrument';
 import { FavoriteInstrumentsService } from './favorite-instruments.service';
 
@@ -11,25 +11,30 @@ export class InstrumentService {
   private instruments: Instrument[] = [];
   
   constructor(private favoriteInstrumentsService: FavoriteInstrumentsService){
-    instruments.forEach(instrument => 
-      this.addInstrument(instrument)
-    )
+    this.instruments = this.loadInstruments();
+  }
+  loadInstruments(): Instrument[]{
+    const instruments: Instrument[] = []
+    instrumentsFixture.forEach(instrument => {
+      const instrumentToAdd: Instrument = new Instrument(instrument);
+      instrumentToAdd.favorite = this.favoriteInstrumentsService.isFavorite(instrument)
+      instruments.push(instrumentToAdd);
+    })
+    return instruments;
   }
   addInstrument(instrument: Instrument): void{
-    const instrumentToAdd: Instrument = new Instrument(instrument);
-    this.setFavoriteInstrument(instrumentToAdd);
-    this.instruments.push(instrumentToAdd);
+    if(!this.isPresent(instrument)){
+      this.instruments.push(instrument);
+    }
   }
   removeInstrument(instrument: Instrument): void{
     this.instruments = this.instruments.filter(instr => instr.id !== instrument.id);
   }
   getInstruments(): Instrument[]{
+    this.instruments.forEach((instrument) => {
+      instrument.favorite = this.favoriteInstrumentsService.isFavorite(instrument)
+    })
     return [...this.instruments]
-  }
-  setFavoriteInstrument(instrument: Instrument){
-    if(this.favoriteInstrumentsService.isFavorite(instrument)){
-      instrument.favorite = true;
-    }  
   }
   setActiveInstrument(activeInstrument: Instrument): void{
     this.instruments.forEach(instrument => {
@@ -39,6 +44,10 @@ export class InstrumentService {
         instrument.active = true
       }
     })
+  }
+  isPresent(instr: Instrument): boolean{
+    const isPresent = this.instruments.filter(instrument => instr.id === instrument.id)
+    return isPresent.length > 0;
   }
 
 }

@@ -19,7 +19,6 @@ FavoriteInstrumentsService
 export class GraphTabNavComponent {
   @Input() instrument!: Instrument
   @Output() close = new EventEmitter<void>();
-  @Output() favorite = new EventEmitter<void>();
 
   constructor(
     private instrumentservice: InstrumentService,
@@ -35,7 +34,6 @@ export class GraphTabNavComponent {
   }
   onStar(instrument: Instrument): void{
     this.favoriteInstrumentsService.toggleInstrument(instrument);
-    this.favorite.emit();
   }
 }
 

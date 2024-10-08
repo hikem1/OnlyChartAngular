@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GraphTabComponent } from '../graph-tab/graph-tab.component';
 import { GraphTabNavComponent } from '../graph-tab-nav/graph-tab-nav.component';
 import { InstrumentService } from '../services/instrument.service';
@@ -15,16 +15,15 @@ import { Instrument } from '../models/instrument';
   styleUrl: './graph-tabs.component.scss'
 })
 
-export class GraphTabsComponent{
+export class GraphTabsComponent implements OnInit{
   instruments: Instrument[] = []
 
   constructor(private instrumentService: InstrumentService){
+  }
+  ngOnInit(): void {
     this.instruments = this.instrumentService.getInstruments();
   }
   closeTab(instrument: Instrument): void {
     this.instruments = this.instruments.filter(instr => instr.id !== instrument.id);
-  }
-  toggleFavorite(instrument: Instrument): void{
-    instrument.favorite = instrument.favorite ? false : true;
   }
 }

@@ -1,26 +1,37 @@
-import { inject } from '@angular/core';
-import { LocalStorageService } from '../services/local-storage.service';
+import { Instrument } from '../models/instrument';
+import { Component, OnInit } from '@angular/core';
+import { FavoriteInstrumentsService } from '../services/favorite-instruments.service';
+import { NgClass, TitleCasePipe } from '@angular/common';
+import { InstrumentService } from '../services/instrument.service';
+import { Router } from '@angular/router';
 
-interface UserSetting {
-  name: string;
-  preferences: {
-    theme: string;
-    language: string;
-  };
-}
+@Component({
+  selector: 'app-favorite-list',
+  standalone: true,
+  imports: [
+    NgClass,
+    TitleCasePipe
+  ],
+  templateUrl: './favorite-list.component.html',
+  styleUrl: './favorite-list.component.scss'
+})
 
-export class FavoriteListComponent {
-  private readonly localStorageService = inject(LocalStorageService);
+export class FavoriteListComponent implements OnInit{
+  favoriteInstruments: Instrument[] = []
 
-  setUserSettings(userSettings: UserSetting): void {
-    this.localStorageService.set('UserSettingKey', userSettings);
+  constructor(
+    private favoriteInstrumentsService: FavoriteInstrumentsService,
+    private instrumentService: InstrumentService,
+    private router: Router
+  ){}
+  ngOnInit(): void {
+    this.favoriteInstruments = this.favoriteInstrumentsService.getInstruments();
   }
-
-  getUserSettings(): UserSetting | null {
-    return this.localStorageService.get<UserSetting>('UserSettingKey');
+  onStar(instrument: Instrument): void{
+    this.favoriteInstrumentsService.toggleInstrument(instrument);
   }
-
-  removeUserSettings(): void {
-    return this.localStorageService.remove('UserSettingKey');
+  onPlus(instrument: Instrument){
+    this.instrumentService.addInstrument(instrument);
+    this.router.navigateByUrl("");
   }
 }
