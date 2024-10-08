@@ -3,9 +3,11 @@
     display: flex;
     justify-content: center;
     color: rgb(236, 103, 87) !important;
+    margin-top: 70px;
 }
 #sign-form{
-    min-width: 400px;
+    width: 350px;
+    height: fit-content;
 }
 span{
     font-size: 0.8rem;

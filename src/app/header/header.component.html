@@ -1,21 +1,21 @@
-<header class="bg-light mb-3">
-    <div class="container d-flex bb">
+<header class="bg-light mb-3 fixed-top">
+    <div class="container d-flex">
         <nav class="navbar navbar-expand-lg container p-0 py-1 ">
             <img (click)="onLogoClick()" src="assets/image/logo.png" alt="only-chart-logo">
-            <div class="container-fluid">
-                <button class="navbar-toggler my-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="container-fluid d-flex flex-row-reverse">
+                <button #navbarToggler class="navbar-toggler my-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="bi bi-list-ul"></i>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div #navbarContent class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mt-3 ms-0 ms-lg-5">
                         <li class="nav-item px-1 px-lg-3 py-2 py-lg-0">
-                            <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link active p-0" aria-current="page">Home</a>
+                            <a (click)="onNavClick()" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link active p-0" aria-current="page">Home</a>
                         </li>
                         <li class="nav-item px-1 px-lg-3 py-2 py-lg-0">
-                            <a routerLink="favorites" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link active p-0" aria-current="page">Favorites</a>
+                            <a (click)="onNavClick()" routerLink="favorites" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link active p-0" aria-current="page">Favorites</a>
                         </li>
                         <li class="nav-item px-1 px-lg-3 py-2 py-lg-0">
-                            <a routerLink="sign-in" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link active p-0" aria-current="page">Sign in</a>
+                            <a (click)="onNavClick()" routerLink="sign-in" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link active p-0" aria-current="page">Sign in</a>
                         </li>
                     </ul>
                     <form class="d-flex py-3 py-lg-0">
