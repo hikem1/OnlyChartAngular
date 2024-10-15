@@ -3,13 +3,15 @@ import { GraphTabComponent } from '../graph-tab/graph-tab.component';
 import { GraphTabNavComponent } from '../graph-tab-nav/graph-tab-nav.component';
 import { InstrumentService } from '../services/instrument.service';
 import { Instrument } from '../models/instrument';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-graph-tabs',
   standalone: true,
   imports: [
     GraphTabNavComponent,
-    GraphTabComponent
+    GraphTabComponent, 
+    NgClass
   ],
   templateUrl: './graph-tabs.component.html',
   styleUrl: './graph-tabs.component.scss'
@@ -18,7 +20,9 @@ import { Instrument } from '../models/instrument';
 export class GraphTabsComponent implements OnInit{
   instruments: Instrument[] = []
 
-  constructor(private instrumentService: InstrumentService){
+  constructor(
+    private instrumentService: InstrumentService,
+  ){
   }
   ngOnInit(): void {
     this.instruments = this.instrumentService.getInstruments();
