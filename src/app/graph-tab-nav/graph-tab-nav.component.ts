@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Instrument } from '../models/instrument';
 import { NgClass, TitleCasePipe } from '@angular/common';
 import { InstrumentService } from '../services/instrument.service';
