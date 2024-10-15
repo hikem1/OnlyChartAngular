@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [
     NgClass,
-    TitleCasePipe
+    TitleCasePipe,
   ],
   templateUrl: './favorite-list.component.html',
   styleUrl: './favorite-list.component.scss'
@@ -31,7 +31,19 @@ export class FavoriteListComponent implements OnInit{
     this.favoriteInstrumentsService.toggleInstrument(instrument);
   }
   onPlus(instrument: Instrument){
-    this.instrumentService.addInstrument(instrument);
-    this.router.navigateByUrl("");
+    if(!this.instrumentService.isPresent(instrument)){
+      if(this.favoriteInstrumentsService.hasGraphLink(instrument)){
+        this.instrumentService.addInstrument(instrument);
+        this.router.navigateByUrl("");
+      }else{
+        this.instrumentService.findGraphLinkInstrument(instrument).subscribe(data=>{
+          instrument.graph_link = (data as any).graph_link;
+          this.instrumentService.addInstrument(instrument);
+          this.router.navigateByUrl("");
+        })
+      }
+    }else{
+      this.router.navigateByUrl("");
+    }
   }
 }
