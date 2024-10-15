@@ -25,3 +25,20 @@ body{
 .bi-star, .bi-star-fill{
     color: rgb(233, 208, 22);
 }
+th, td{
+    max-width: 50px;
+    font-size: 0.8rem;
+    i{
+        animation: scale-down-center 0.2s both;
+     &:hover{
+        animation: scale-up-center 0.2s both;
+        }
+    }
+}
+.fav-col{
+    width: 10px;
+}
+.bi-plus-square-fill{
+    color: rgb(236, 103, 87);
+}
+

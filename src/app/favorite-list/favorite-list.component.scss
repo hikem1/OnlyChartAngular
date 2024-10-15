@@ -1,19 +1,7 @@
 :host{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     margin-top: 70px;
 }
-.bi-plus-square-fill{
-    color: rgb(236, 103, 87);
-}
-th, td{
-    max-width: 50px;
-    font-size: 0.8rem;
-}
-.fav-col{
-    width: 10px;
-}
-i{
-    animation: scale-down-center 0.2s both;
- &:hover{
-    animation: scale-up-center 0.2s both;
-    }
-}
+
