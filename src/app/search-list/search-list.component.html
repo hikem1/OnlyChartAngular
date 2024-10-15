@@ -1,0 +1,29 @@
+@if (instruments.length) {
+    <div class="container tilt-in-top">
+        <table class="table table-responsive rounded shadow">
+            <thead class="rounded">
+                <tr class="rounded">
+                    <th class="rounded fav-col"></th>
+                    <th class="text-secondary text-nowrap overflow-hidden">Name</th>
+                    <th class="text-secondary  text-nowrap overflow-hidden">Code</th>
+                    <th class="text-secondary text-nowrap overflow-hidden">Exchange Place</th>
+                    <th class="rounded text-secondary text-center text-nowrap overflow-hidden">Add to home</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (instrument of instruments; track instrument.id) {
+                    <tr class="">
+                        <td class="fav-col text-nowrap overflow-hidden"><i class="bi py-1" [ngClass]="instrument.favorite ? 'bi-star-fill': 'bi-star'" (click)="onStar(instrument)" ></i></td>
+                        <td class=" text-nowrap overflow-hidden">{{ instrument.name | titlecase}}</td>
+                        <td class=" text-nowrap overflow-hidden">{{ instrument.code }}</td>
+                        <td class="text-nowrap overflow-hidden">{{ instrument.exchange_place | titlecase}}</td>
+                        <td><i (click)="onPlus(instrument)" class="bi bi-plus-square-fill d-flex justify-content-center py-1"></i></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+<div class="" [ngClass]="loading ? 'loader-container' : 'd-none'">
+    <div></div>
+</div>
