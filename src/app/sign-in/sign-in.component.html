@@ -4,14 +4,14 @@
         <span class="fst-italic d-flex align-items-end">(to zonebourse site)</span>
     </div>
     <div class="modal-body mt-4">
-        <form method="POST" action="">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="mb-3">
                 <label for="email" class="form-label">Email address :</label>
-                <input name="email" type="email" class="form-control form-control-sm" id="email" aria-describedby="emailHelp" required="required"/>
+                <input formControlName="email" name="email" type="email" class="form-control form-control-sm" id="email" aria-describedby="emailHelp" required="required"/>
             </div> 
             <div class="mb-3">
                 <label for="password" class="form-label">Password :</label>
-                <input name="password" type="password" class="form-control form-control-sm" id="password" required="required"/>
+                <input formControlName="password" name="password" type="password" class="form-control form-control-sm" id="password" required="required"/>
             </div>
             <div>
                 <p id="error-message" class="text-danger"></p>
