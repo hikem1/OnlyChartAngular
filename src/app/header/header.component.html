@@ -18,8 +18,8 @@
                             <a (click)="onNavClick()" routerLink="sign-in" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link active p-0" aria-current="page">Sign in</a>
                         </li>
                     </ul>
-                    <form class="d-flex py-3 py-lg-0">
-                        <input class="form-control form-control-sm me-2" type="search" placeholder="Search instrument..." aria-label="Search">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="d-flex py-3 py-lg-0">
+                        <input formControlName="search" class="form-control form-control-sm me-2" type="search" placeholder="Search instrument..." aria-label="Search">
                         <button class="btn btn-outline-success btn-sm" type="submit">Search</button>
                     </form>
                 </div>
