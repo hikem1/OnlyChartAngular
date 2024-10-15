@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Instrument, InstrumentInterface } from '../models/instrument';
+import { Instrument } from '../models/instrument';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
@@ -49,5 +49,10 @@ export class FavoriteInstrumentsService {
     this.favoriteInstruments = this.loadFavoriteInstruments();
     const isPresent: Instrument[] = this.favoriteInstruments.filter(favoriteInstrument => favoriteInstrument.id === instrument.id)
     return isPresent.length > 0;
+  }
+  hasGraphLink(instrument: Instrument): boolean{
+    this.favoriteInstruments = this.loadFavoriteInstruments();
+    const found: Instrument[] = this.favoriteInstruments.filter(favoriteInstrument => favoriteInstrument.id === instrument.id)
+    return found[0].graph_link !== null;
   }
 }
