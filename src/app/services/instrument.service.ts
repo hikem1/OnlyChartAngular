@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
-import instrumentsFixture from '../../../public/assets/fixtures/instruments.json';
+import { ErrorHandler, Injectable, inject } from '@angular/core';
 import { Instrument } from '../models/instrument';
 import { FavoriteInstrumentsService } from './favorite-instruments.service';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { catchError, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,23 +11,18 @@ import { FavoriteInstrumentsService } from './favorite-instruments.service';
 
 export class InstrumentService {
   private instruments: Instrument[] = [];
-  
-  constructor(private favoriteInstrumentsService: FavoriteInstrumentsService){
-    this.instruments = this.loadInstruments();
+  newInstrument!: Instrument;
+  hasNewInstrument: boolean = false
+  emitInstrument!: Observable<Instrument>
+
+  constructor(
+    private favoriteInstrumentsService: FavoriteInstrumentsService,
+    private http: HttpClient,
+  ){
   }
-  loadInstruments(): Instrument[]{
-    const instruments: Instrument[] = []
-    instrumentsFixture.forEach(instrument => {
-      const instrumentToAdd: Instrument = new Instrument(instrument);
-      instrumentToAdd.favorite = this.favoriteInstrumentsService.isFavorite(instrument)
-      instruments.push(instrumentToAdd);
-    })
-    return instruments;
-  }
-  addInstrument(instrument: Instrument): void{
-    if(!this.isPresent(instrument)){
-      this.instruments.push(instrument);
-    }
+  addInstrument(instrument: Instrument){
+    this.instruments.push(instrument)
+    this.setActiveInstrument(instrument)
   }
   removeInstrument(instrument: Instrument): void{
     this.instruments = this.instruments.filter(instr => instr.id !== instrument.id);
@@ -49,5 +46,7 @@ export class InstrumentService {
     const isPresent = this.instruments.filter(instrument => instr.id === instrument.id)
     return isPresent.length > 0;
   }
-
+  findGraphLinkInstrument(instrument: Instrument){
+    return this.http.get(`http://localhost:8000/app/api?id=${instrument.id}&link=${instrument.link}`)
+  }
 }

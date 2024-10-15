@@ -14,10 +14,12 @@ import { NgClass } from '@angular/common';
 })
 
 export class GraphTabComponent implements OnInit{
-  @Input() instrument!: Instrument
-  urlSafe!: SafeResourceUrl;
+  @Input() instrument!: Instrument;
+  urlSafe: SafeResourceUrl|null = null;
 
-  constructor(private domSanitizer: DomSanitizer){
+  constructor(
+    private domSanitizer: DomSanitizer,
+  ){
   }
   ngOnInit(): void {
     if(this.instrument.graph_link !== null){
