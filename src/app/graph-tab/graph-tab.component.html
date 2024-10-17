@@ -1,5 +1,8 @@
-<div class="tab-pane fade show fullHeight scall-in"role="tabpanel">
-    @if (urlSafe !== null) {
+<div class="tab-pane fade show fullHeight position-relative"role="tabpanel">
+    @if (isLoading) {
+        <app-loader></app-loader>
+    }
+    @if (urlSafe) {
         <iframe [src]="urlSafe" frameborder="0" class="fullHeight"></iframe>
     }
 </div>

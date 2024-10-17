@@ -32,18 +32,8 @@ export class FavoriteListComponent implements OnInit{
   }
   onPlus(instrument: Instrument){
     if(!this.instrumentService.isPresent(instrument)){
-      if(this.favoriteInstrumentsService.hasGraphLink(instrument)){
-        this.instrumentService.addInstrument(instrument);
-        this.router.navigateByUrl("");
-      }else{
-        this.instrumentService.findGraphLinkInstrument(instrument).subscribe(data=>{
-          instrument.graph_link = (data as any).graph_link;
-          this.instrumentService.addInstrument(instrument);
-          this.router.navigateByUrl("");
-        })
-      }
-    }else{
-      this.router.navigateByUrl("");
+      this.instrumentService.addInstrument(instrument);
     }
+    this.router.navigateByUrl("");
   }
 }

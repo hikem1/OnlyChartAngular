@@ -55,4 +55,7 @@ export class FavoriteInstrumentsService {
     const found: Instrument[] = this.favoriteInstruments.filter(favoriteInstrument => favoriteInstrument.id === instrument.id)
     return found[0].graph_link !== null;
   }
+  prefereFavoriteInstrument(instrument: Instrument): Instrument{
+    return this.favoriteInstruments.filter(favoriteInstrument => favoriteInstrument.id === instrument.id)[0]
+  }
 }

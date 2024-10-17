@@ -21,15 +21,15 @@ export class GraphTabNavComponent {
   @Output() close = new EventEmitter<void>();
 
   constructor(
-    private instrumentservice: InstrumentService,
+    private instrumentService: InstrumentService,
     private favoriteInstrumentsService: FavoriteInstrumentsService
   ){
   }
   onActiveTab(instrument: Instrument): void{
-    this.instrumentservice.setActiveInstrument(instrument);
+    this.instrumentService.setActiveInstrument(instrument);
   }
   onCloseTab(instrument: Instrument): void {
-    this.instrumentservice.removeInstrument(instrument);
+    this.instrumentService.removeInstrument(instrument);
     this.close.emit();
   }
   onStar(instrument: Instrument): void{

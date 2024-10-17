@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Instrument } from '../models/instrument';
 import { Observable } from 'rxjs';
+import { FavoriteInstrumentsService } from './favorite-instruments.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,22 +10,22 @@ import { Observable } from 'rxjs';
 export class SearchInstrumentsService {
   matchInstruments: Instrument[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private favoriteInstrument: FavoriteInstrumentsService,
+    private http: HttpClient
+  ) {
   }
   search(keyword: string): Observable<Object>{
-    return this.http.get('http://localhost:8000/app/api?search=' + keyword)
-    // this.matchInstruments = [];
-    // this.http.get('http://localhost:8000/app/api?search=' + keyword).subscribe(jsonInstruments => {
-    //   (jsonInstruments as Instrument[]).forEach((instrument: Instrument) => {
-    //     this.matchInstruments.push(new Instrument(instrument))
-    //   });
-    // });
-    // return this.matchInstruments;
+    return this.http.get('http://localhost:8000/src/index.php?search=' + keyword);
   }
   pushInstruments(instruments: Instrument[]){
     this.matchInstruments = [];
     (instruments as Instrument[]).forEach((instrument: Instrument) => {
-        this.matchInstruments.push(new Instrument(instrument))
+        const matchInstrument = new Instrument(instrument);
+        if(this.favoriteInstrument.isFavorite(matchInstrument)){
+          matchInstrument.favorite = true;
+        }
+        this.matchInstruments.push(matchInstrument);
       });
   }
   getInstruments(): Instrument[]{
