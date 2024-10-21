@@ -16,7 +16,7 @@ export class SearchInstrumentsService {
   ) {
   }
   search(keyword: string): Observable<Object>{
-    return this.http.get('http://192.168.1.38:8000/src/index.php?search=' + keyword);
+    return this.http.get('http://20.199.22.146/zb-api/public/src/index.php?search=' + keyword);
   }
   pushInstruments(instruments: Instrument[]){
     this.matchInstruments = [];

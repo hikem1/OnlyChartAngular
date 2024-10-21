@@ -47,6 +47,6 @@ export class InstrumentService {
     return isPresent.length > 0;
   }
   findGraphLinkInstrument(instrument: Instrument){
-    return this.http.get(`http://192.168.1.38:8000/src/index.php?id=${instrument.id}&link=${instrument.link}`)
+    return this.http.get(`http://20.199.22.146/zb-api/public/src/index.php?id=${instrument.id}&link=${instrument.link}`)
   }
 }

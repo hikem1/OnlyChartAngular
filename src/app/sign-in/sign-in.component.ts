@@ -26,8 +26,7 @@ export class SignInComponent {
   constructor(){
   }
   onSubmit(){
-    this.http.post('http://192.168.1.38:8000/src', this.form.value, { withCredentials: true }).subscribe(data => {
-      console.log(data);
+    this.http.post('http://20.199.22.146/zb-api/public/src', this.form.value, { withCredentials: true }).subscribe(data => {
     });
   }
 }
