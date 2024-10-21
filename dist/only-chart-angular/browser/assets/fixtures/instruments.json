@@ -1,0 +1,18 @@
+[
+    {
+        "id": 4646,
+        "name": "ORANGE",
+        "code": "ORA",
+        "graph_link": "https://light.it-finance.com/ZoneBoursePublic/itcharts.phtml?key=cdad3a8f2e70364859c49b9eccb5b4afe5782117c93306daa433fcde021768b5a0a80b8f66fc0eb0b43b32a94961629d248828374c23f5c5d8be42bc07a902a7&locale=fr_FR&id=4649&20241003155951",
+        "link": "/cours/action/ORANGE-4649/",
+        "exchange_place": "Euronext Paris"
+    },
+    {
+        "id": 29421303,
+        "name": "MICHELIN",
+        "code": "FTE",
+        "graph_link": "https://light.it-finance.com/ZoneBoursePublic/itcharts.phtml?key=3f7c6d2e43eb14613814bebaaa9caa2e541a1819068eeed2851f076ccf0c6508f6291f2b254f8acfe25bc85d35da36c4b4755c4b70b49fcfd2889c05fde91d21&locale=fr_FR&id=4672&20241004091358",
+        "link": "/cours/action/ORANGE-29421303/",
+        "exchange_place": "LIQUIDNET SYSTEMS"
+    }
+]
