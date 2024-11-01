@@ -19,7 +19,7 @@ export class UserService {
     });
   }
   logout(){
-    this.http.get<User>("http://localhost:3000/logout").subscribe(data => {
+    this.http.get<User>("http://4.233.147.4:3000/logout").subscribe(data => {
       const user = new User();
       this.user = user.fromJson(data);
     })
