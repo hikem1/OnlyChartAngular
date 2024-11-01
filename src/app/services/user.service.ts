@@ -13,7 +13,7 @@ export class UserService {
 
   constructor() { }
   login(formValues: FormGroup){
-    this.http.get<User>(`http://localhost:3000/login?email=${formValues.value.email}&password=${formValues.value.password}`).subscribe(data => {
+    this.http.get<User>(`http://4.233.147.4:3000/login?email=${formValues.value.email}&password=${formValues.value.password}`).subscribe(data => {
       const user = new User();
       this.user = user.fromJson(data);
     });
