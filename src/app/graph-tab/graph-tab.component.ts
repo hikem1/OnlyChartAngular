@@ -35,8 +35,8 @@ export class GraphTabComponent implements OnInit{
   }
   loadGraphLink(): void{
     this.isLoading = true
-    this.instrumentService.findGraphLinkInstrument(this.instrument).subscribe(data=>{
-      this.instrument.graph_link = (data as any).graph_link;
+    this.instrumentService.findGraphLinkInstrument(this.instrument).subscribe(graph_link=>{
+      this.instrument.graph_link = graph_link
       this.urlSafe = this.domSanitizer.bypassSecurityTrustResourceUrl(this.instrument.graph_link)
       this.isLoading = false
     })

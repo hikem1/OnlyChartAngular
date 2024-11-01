@@ -35,9 +35,10 @@ export class SearchListComponent implements OnInit{
   ngOnInit(): void {
     this.route.queryParams.subscribe((params)=>{
       this.keyword = params["keyword"];
-      this.searchInstrumentsService.search(this.keyword).subscribe(instruments => {
-        this.searchInstrumentsService.pushInstruments(instruments as Instrument[])
-        this.instruments = this.searchInstrumentsService.getInstruments()
+      this.searchInstrumentsService.search(this.keyword)
+        .subscribe(instruments => {
+          this.searchInstrumentsService.pushInstruments(instruments as Instrument[])
+          this.instruments = this.searchInstrumentsService.getInstruments()
       })  
     })
   }
