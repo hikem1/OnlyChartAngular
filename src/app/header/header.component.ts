@@ -1,10 +1,10 @@
 import { NgClass } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, Injectable, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, Injectable, inject, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { SearchInstrumentsService } from '../services/search-instruments.service';
-
+import { UserService } from '../services/user.service';
+import { Popover } from 'bootstrap'
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -25,14 +25,13 @@ import { SearchInstrumentsService } from '../services/search-instruments.service
 export class HeaderComponent{
   @ViewChild('navbarToggler') navbarToggler!: ElementRef;
   @ViewChild('navbarContent') navbarContent!: ElementRef;
-  private http = inject(HttpClient)
   form: FormGroup = new FormGroup({
     search: new FormControl('')
   });
 
   constructor(
     private router: Router,
-    private searchInstrumentsService: SearchInstrumentsService
+    public userService: UserService
   ){
   }
   onLogoClick(): void{
@@ -48,6 +47,8 @@ export class HeaderComponent{
     const keyword: string = this.form.value.search
     this.router.navigate(["search"], { queryParams: {keyword: keyword} });
     this.onNavClick();
-    
+  }
+  onLogoutClick(){
+    this.userService.logout()
   }
 }
