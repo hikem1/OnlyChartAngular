@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, inject, Injectable } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Injectable, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -17,16 +17,15 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 
 export class SignInComponent {
-  private http = inject(HttpClient)
-
+  @ViewChild('errorMessage') errorMessage!: ElementRef;
+  
   form: FormGroup = new FormGroup({
     email: new FormControl(''),
     password: new FormControl('')
   });
-  constructor(){
+  constructor(public userService: UserService){
   }
   onSubmit(){
-    this.http.post('http://20.199.22.146/zb-api/public/src', this.form.value, { withCredentials: true }).subscribe(data => {
-    });
+    this.userService.login(this.form)
   }
 }
