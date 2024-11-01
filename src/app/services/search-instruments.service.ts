@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Instrument } from '../models/instrument';
-import { Observable } from 'rxjs';
 import { FavoriteInstrumentsService } from './favorite-instruments.service';
 
 @Injectable({
@@ -13,10 +12,9 @@ export class SearchInstrumentsService {
   constructor(
     private favoriteInstrument: FavoriteInstrumentsService,
     private http: HttpClient
-  ) {
-  }
-  search(keyword: string): Observable<Object>{
-    return this.http.get('http://20.199.22.146/zb-api/public/src/index.php?search=' + keyword);
+  ) {}
+  search(keyword: string){
+    return this.http.get('http://localhost:3000/search/' + keyword);
   }
   pushInstruments(instruments: Instrument[]){
     this.matchInstruments = [];

@@ -1,9 +1,8 @@
-import { ErrorHandler, Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Instrument } from '../models/instrument';
 import { FavoriteInstrumentsService } from './favorite-instruments.service';
-import { HttpClient, HttpHandler } from '@angular/common/http';
-import { catchError, Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +46,7 @@ export class InstrumentService {
     return isPresent.length > 0;
   }
   findGraphLinkInstrument(instrument: Instrument){
-    return this.http.get(`http://20.199.22.146/zb-api/public/src/index.php?id=${instrument.id}&link=${instrument.link}`)
+    const headers = new HttpHeaders()
+    return this.http.get(`http://localhost:3000/graph-link?id=${instrument.id}&link=${instrument.link}`, { headers, responseType: 'text'})
   }
 }
