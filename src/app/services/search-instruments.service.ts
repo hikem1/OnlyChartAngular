@@ -14,7 +14,7 @@ export class SearchInstrumentsService {
     private http: HttpClient
   ) {}
   search(keyword: string){
-    return this.http.get('http://localhost:3000/search/' + keyword);
+    return this.http.get('http://4.233.147.4:3000/search/' + keyword);
   }
   pushInstruments(instruments: Instrument[]){
     this.matchInstruments = [];

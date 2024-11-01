@@ -47,6 +47,6 @@ export class InstrumentService {
   }
   findGraphLinkInstrument(instrument: Instrument){
     const headers = new HttpHeaders()
-    return this.http.get(`http://localhost:3000/graph-link?id=${instrument.id}&link=${instrument.link}`, { headers, responseType: 'text'})
+    return this.http.get(`http://4.233.147.4:3000/graph-link?id=${instrument.id}&link=${instrument.link}`, { headers, responseType: 'text'})
   }
 }
