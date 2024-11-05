@@ -23,7 +23,6 @@ export class GraphTabComponent implements OnInit{
   @Output() close = new EventEmitter<void>();
 
   urlSafe!: SafeResourceUrl;
-  isLoading: boolean = false;
 
   constructor(
     private instrumentService: InstrumentService,
@@ -39,18 +38,16 @@ export class GraphTabComponent implements OnInit{
     }
   }
   loadGraphLink(): void{
-    this.isLoading = true
     this.instrumentService.findGraphLinkInstrument(this.instrument)
     .pipe(take(1))
     .subscribe({
       next: (graph_link)=>{
-        this.instrument.graph_link = graph_link
+        this.instrument.graph_link = graph_link;
+        this.instrumentService.updateHomeInstrument(this.instrument);
         this.urlSafe = this.domSanitizer.bypassSecurityTrustResourceUrl(this.instrument.graph_link)
-        this.isLoading = false
       },
       error: (error)=>{
         this.errorService.showError(error);
-        this.isLoading = false
         this.instrumentService.removeInstrument(this.instrument);
         this.close.emit();
       }
