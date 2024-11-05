@@ -1,8 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { User } from '../models/user';
-import { catchError, take, throwError } from 'rxjs';
+import { take } from 'rxjs';
 import { environment } from '../../environment/environment';
 import { ErrorService } from './error.service';
 

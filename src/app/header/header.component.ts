@@ -1,10 +1,8 @@
 import { NgClass } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, Injectable, inject, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, Injectable, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { UserService } from '../services/user.service';
-import { Popover } from 'bootstrap'
 @Component({
   selector: 'app-header',
   standalone: true,

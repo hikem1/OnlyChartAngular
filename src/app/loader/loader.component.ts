@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription, timer } from 'rxjs';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { LoaderService } from '../services/loader.service';
 import { AsyncPipe, NgIf } from '@angular/common';
 
