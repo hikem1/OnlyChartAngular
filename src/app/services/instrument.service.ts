@@ -3,6 +3,7 @@ import { Instrument } from '../models/instrument';
 import { FavoriteInstrumentsService } from './favorite-instruments.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class InstrumentService {
   newInstrument!: Instrument;
   hasNewInstrument: boolean = false
   emitInstrument!: Observable<Instrument>
+  apiUrl: string = environment.apiUrl;
 
   constructor(
     private favoriteInstrumentsService: FavoriteInstrumentsService,
@@ -47,6 +49,6 @@ export class InstrumentService {
   }
   findGraphLinkInstrument(instrument: Instrument){
     const headers = new HttpHeaders()
-    return this.http.get(`http://4.233.147.4:3000/graph-link?id=${instrument.id}&link=${instrument.link}`, { headers, responseType: 'text'})
+    return this.http.get(`${this.apiUrl}/graph-link?id=${instrument.id}&link=${instrument.link}`, { headers, responseType: 'text'})
   }
 }
