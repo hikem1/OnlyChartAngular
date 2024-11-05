@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SearchInstrumentsService } from '../services/search-instruments.service';
 import { Instrument } from '../models/instrument';
-import { NgClass, TitleCasePipe } from '@angular/common';
+import { NgClass, NgIf, TitleCasePipe } from '@angular/common';
 import { FavoriteInstrumentsService } from '../services/favorite-instruments.service';
 import { InstrumentService } from '../services/instrument.service';
 import { LoaderComponent } from '../loader/loader.component';
+import { take } from 'rxjs';
+import { ErrorService } from '../services/error.service';
+import { LoaderService } from '../services/loader.service';
 
 @Component({
   selector: 'app-search-list',
@@ -13,6 +16,7 @@ import { LoaderComponent } from '../loader/loader.component';
   imports: [
     LoaderComponent,
     NgClass,
+    NgIf,
     TitleCasePipe
   ],
   templateUrl: './search-list.component.html',
@@ -29,16 +33,24 @@ export class SearchListComponent implements OnInit{
     private route: ActivatedRoute,
     private searchInstrumentsService: SearchInstrumentsService,
     private favoriteInstrumentsService: FavoriteInstrumentsService,
-    private instrumentService: InstrumentService
+    private instrumentService: InstrumentService,
+    private errorService: ErrorService,
+    private loaderService: LoaderService
   ){
   }
   ngOnInit(): void {
     this.route.queryParams.subscribe((params)=>{
       this.keyword = params["keyword"];
       this.searchInstrumentsService.search(this.keyword)
-        .subscribe(instruments => {
+      .pipe(take(1))
+      .subscribe({
+        next: (instruments)=>{
           this.searchInstrumentsService.pushInstruments(instruments as Instrument[])
           this.instruments = this.searchInstrumentsService.getInstruments()
+        },
+        error: (error)=>{
+          this.errorService.showError(error)
+          }
       })  
     })
   }
