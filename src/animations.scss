@@ -29,6 +29,27 @@
 .tilt-in-left {
     animation: tilt-in-left 1s both;
 }
+@keyframes tilt-in-right {
+    0% {
+        opacity: 0;
+        transform: translateX(300px);
+    }
+    10% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+    90% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+    100%{
+        transform: translateX(300px);
+        opacity: 0;
+    }
+}
+.tilt-in-right {
+    animation: tilt-in-right 5s both;
+}
 @keyframes scall-in {
     0% {
         filter: blur(5px);
