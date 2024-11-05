@@ -18,6 +18,7 @@ export class Instrument implements InstrumentInterface{
     exchange_place: string
     active?: boolean;
     favorite?: boolean;
+    add_favorite_date?: Date;
 
     constructor(instrumentJson: InstrumentInterface){
         this.id = instrumentJson.id;
@@ -28,5 +29,6 @@ export class Instrument implements InstrumentInterface{
         this.exchange_place = instrumentJson.exchange_place;
         this.active = false;
         this.favorite = false;
+        this.add_favorite_date = new Date();
     }
 }
