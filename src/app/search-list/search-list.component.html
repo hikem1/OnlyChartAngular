@@ -11,9 +11,6 @@
                 </tr>
             </thead>
             <tbody class="position-relative">
-                @if (isLoading) {
-                    <app-loader></app-loader>
-                }
                 @for (instrument of instruments; track instrument.id) {
                     <tr>
                         <td class="fav-col text-nowrap overflow-hidden"><i class="bi py-1" [ngClass]="instrument.favorite ? 'bi-star-fill': 'bi-star'" (click)="onStar(instrument)" ></i></td>
