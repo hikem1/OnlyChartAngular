@@ -1,10 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Instrument } from '../models/instrument';
 import { NgClass, TitleCasePipe } from '@angular/common';
 import { InstrumentService } from '../services/instrument.service';
 import { FavoriteInstrumentsService } from '../services/favorite-instruments.service';
+import { Router } from '@angular/router';
+import { NavCollapseService } from '../services/nav-collapse.service';
 
-FavoriteInstrumentsService
+
 @Component({
   selector: 'app-graph-tab-nav',
   standalone: true,
@@ -17,23 +19,30 @@ FavoriteInstrumentsService
 })
 
 export class GraphTabNavComponent {
-  @Input() instrument!: Instrument
-  @Output() close = new EventEmitter<void>();
+  @Input() instrument!: Instrument;
 
   constructor(
     private instrumentService: InstrumentService,
-    private favoriteInstrumentsService: FavoriteInstrumentsService
+    private favoriteInstrumentsService: FavoriteInstrumentsService,
+    private router: Router,
+    private navCollapseService: NavCollapseService
   ){
   }
-  onActiveTab(instrument: Instrument): void{
-    this.instrumentService.setActiveInstrument(instrument);
+  onActiveTab(): void{
+    this.instrumentService.setActiveInstrument(this.instrument);
+    this.navCollapseService.toggleCollapse()
+    this.navigateToHome()
   }
-  onCloseTab(instrument: Instrument): void {
-    this.instrumentService.removeInstrument(instrument);
-    this.close.emit();
+  onCloseTab(): void {
+    this.instrumentService.removeInstrument(this.instrument);
   }
-  onStar(instrument: Instrument): void{
-    this.favoriteInstrumentsService.toggleInstrument(instrument);
+  onStar(): void{
+    this.favoriteInstrumentsService.toggleInstrument(this.instrument)
+  }
+  navigateToHome(){
+    if(this.router.url !== "/"){
+      this.router.navigateByUrl("/")
+    }
   }
 }
 

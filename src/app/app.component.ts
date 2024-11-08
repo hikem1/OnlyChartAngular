@@ -3,6 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { ErrorPopoverComponent } from './error-popover/error-popover.component';
 import { LoaderComponent } from './loader/loader.component';
+import { NavComponent } from './nav/nav.component';
+
 
 @Component({
   selector: 'app-root',
@@ -10,6 +12,7 @@ import { LoaderComponent } from './loader/loader.component';
   imports: [
     RouterOutlet,
     HeaderComponent,
+    NavComponent,
     ErrorPopoverComponent,
     LoaderComponent
   ],

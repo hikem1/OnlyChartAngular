@@ -1,0 +1,28 @@
+<nav [ngClass]='isCollapsed ? "hide" : " show"'>
+    <div class="d-flex justify-content-between bb mx-4">
+        <h5 class="fw-bold text-nowrap">Navigate</h5>
+        <i (click)="onCloseClick()" class="bi bi-x-lg"></i>
+    </div>
+    <ul class="navbar-nav ms-5 mt-3 mb-5">
+        <li class="nav-item">
+            <a (click)="onNavClick()" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link active text-nowrap" aria-current="page">Home</a>
+        </li>
+        <li class="nav-item">
+            <a (click)="onNavClick()" routerLink="favorites" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link active text-nowrap" aria-current="page">Favorites</a>
+        </li>
+        <li [ngClass]='{"d-none" : userService.getUser() && userService.getAuthStatus()}' class="d-inline-block nav-item">
+            <a (click)="onNavClick()" routerLink="sign-in" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link active text-nowrap" aria-current="page">Sign in</a>
+        </li>
+        <li [ngClass]='{"d-none" : !userService.getUser() || !userService.getAuthStatus()}' class="d-inline-block nav-item">
+            <a (click)="onNavClick()" routerLink="sign-in" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link active text-nowrap" aria-current="page">Logout</a>
+        </li>
+    </ul>
+    <div class="bb mx-4">
+        <h5 class="fw-bold text-nowrap">Instruments</h5>
+    </div>
+    <ul class="p-3">
+        @for (instrument of instruments; track $index) {
+            <app-graph-tab-nav class="tilt-in-left" [instrument]="instrument"></app-graph-tab-nav>
+        }
+    </ul>
+</nav>

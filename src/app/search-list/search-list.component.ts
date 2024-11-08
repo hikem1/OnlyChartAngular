@@ -35,8 +35,16 @@ export class SearchListComponent implements OnInit{
     private favoriteInstrumentsService: FavoriteInstrumentsService,
     private instrumentService: InstrumentService,
     private errorService: ErrorService,
-    private loaderService: LoaderService
   ){
+    this.favoriteInstrumentsService.favoriteInstruments$.subscribe(instruments => {
+      this.instruments.forEach(instrument => {
+        if(this.favoriteInstrumentsService.isFavorite(instrument)){
+          instrument.favorite = true;
+        }else{
+          instrument.favorite = false;
+        }
+      })
+    })
   }
   ngOnInit(): void {
     this.route.queryParams.subscribe((params)=>{
@@ -55,24 +63,40 @@ export class SearchListComponent implements OnInit{
     })
   }
   onPlus(instrument: Instrument): void{
-    if(this.favoriteInstrumentsService.isFavorite(instrument)){
-      const favoriteInstrument = this.favoriteInstrumentsService.prefereFavoriteInstrument(instrument);
-      this.instrumentService.addInstrument(favoriteInstrument);
-    }else{
-      this.instrumentService.addInstrument(instrument);
+    if(!this.instrumentService.isPresent(instrument)){
+      if(!instrument.graph_link){
+        this.instrumentService.findGraphLinkInstrument(instrument)
+        .pipe(take(1))
+        .subscribe({
+          next: (graph_link) => {
+            instrument.graph_link = graph_link
+            this.instrumentService.addInstrument(instrument);
+          },
+          error: (error)=> {
+            this.errorService.showError(error);
+          }
+        });
+      }else{
+        this.instrumentService.addInstrument(instrument);
+      }
     }
-    this.router.navigateByUrl("");
   }
-  onStar(instrument: Instrument): void{
-    if(this.favoriteInstrumentsService.isFavorite(instrument)){
+  onStar(instrument: Instrument){
+    if(!this.favoriteInstrumentsService.isFavorite(instrument)){
+      this.instrumentService.findGraphLinkInstrument(instrument)
+      .pipe(take(1))
+      .subscribe({
+        next: (graph_link) => {
+          instrument.graph_link = graph_link
+          this.favoriteInstrumentsService.addInstrument(instrument);
+        },
+        error: (error)=> {
+          this.errorService.showError(error);
+        }
+      });
+    }else{
       this.favoriteInstrumentsService.removeInstrument(instrument);
-    }else{
-      this.isLoading = true;
-      this.instrumentService.findGraphLinkInstrument(instrument).subscribe(data=>{
-        instrument.graph_link = (data as any).graph_link;
-        this.favoriteInstrumentsService.addInstrument(instrument);
-        this.isLoading = false;
-      })
     }
   }
+  
 }
