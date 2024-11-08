@@ -1,16 +1,16 @@
 @if (instruments.length) {
-<div class="tilt-in-top fullHeight container p-0">
-    <nav class="bg-light">
+<div class="tilt-in-top fullHeight container p-0 bg-wight">
+    <!-- <nav class="">
         <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
             @for (instrument of instruments; track $index) {
                 <app-graph-tab-nav [instrument]="instrument" (close)="closeTab(instrument)" [ngClass]="{'tilt-in-left' : $index > 0}" ></app-graph-tab-nav>
             }
         </div>
-    </nav>
+    </nav> -->
     <div class="tab-content fullHeight border shadow rounded" id="nav-tabContent">
         @for (instrument of instruments; track instrument.id) {
             @if (instrument.active) {
-                <app-graph-tab [instrument]="instrument" (close)="closeTab(instrument)" class="fullHeight"></app-graph-tab>
+                <!-- <app-graph-tab [instrument]="instrument" (close)="closeTab(instrument)" class="fullHeight"></app-graph-tab> -->
             }
         }
     </div>

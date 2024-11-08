@@ -1,29 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Instrument } from '../models/instrument';
 import { LocalStorageService } from './local-storage.service';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class FavoriteInstrumentsService {
-  favoriteInstruments: Instrument[] = [];
+  private favoriteInstrumentsSubject = new BehaviorSubject<Instrument[]>([]);
+  favoriteInstruments$ = this.favoriteInstrumentsSubject.asObservable();
 
   constructor(private localStorageService: LocalStorageService) { 
-    this.favoriteInstruments = this.loadFavoriteInstruments();
-  }
-  loadFavoriteInstruments(): Instrument[]{
-    const favoriteInstruments: Instrument[] = []
-    const instruments: Instrument[] = this.localStorageService.get('instruments');
-    instruments.forEach((instrument: Instrument) => {
-      favoriteInstruments.push(this.parseInstrument(instrument))
-    })
-    return favoriteInstruments
-  }
-  parseInstrument(jsonInstrument: any): Instrument{
-    const instrument: Instrument = new Instrument(jsonInstrument);
-    instrument.favorite = true;
-    return instrument
+    const favoriteInstruments = this.localStorageService.get('favorite-instruments')
+    this.favoriteInstrumentsSubject.next(favoriteInstruments)
   }
   toggleInstrument(instrument: Instrument): void{
     if(!this.isFavorite(instrument)){
@@ -33,29 +23,31 @@ export class FavoriteInstrumentsService {
     }
   }
   addInstrument(instrument: Instrument): void{
+    const favoriteInstruments: Instrument[] = this.localStorageService.get('favorite-instruments');
     instrument.favorite = true;
-    this.favoriteInstruments.push(instrument);
-    this.localStorageService.set("instruments", this.favoriteInstruments)
+    favoriteInstruments.push(instrument);
+    this.localStorageService.set("favorite-instruments", favoriteInstruments)
+    this.favoriteInstrumentsSubject.next(favoriteInstruments)
   }
   removeInstrument(instrument: Instrument): void {
+    let favoriteInstruments: Instrument[] = this.localStorageService.get('favorite-instruments');
     instrument.favorite = false;
-    this.favoriteInstruments = this.favoriteInstruments.filter(favoriteInstrument => favoriteInstrument.id !== instrument.id)
-    this.localStorageService.set("instruments", this.favoriteInstruments)
-  }
-  getInstruments(): Instrument[]{
-    return [...this.favoriteInstruments]
+    favoriteInstruments = favoriteInstruments.filter(favoriteInstrument => favoriteInstrument.id !== instrument.id)
+    this.localStorageService.set("favorite-instruments", favoriteInstruments);
+    this.favoriteInstrumentsSubject.next(favoriteInstruments);
   }
   isFavorite(instrument: Instrument): boolean{
-    this.favoriteInstruments = this.loadFavoriteInstruments();
-    const isPresent: Instrument[] = this.favoriteInstruments.filter(favoriteInstrument => favoriteInstrument.id === instrument.id)
+    const favoriteInstruments: Instrument[] = this.localStorageService.get('favorite-instruments');
+    const isPresent: Instrument[] = favoriteInstruments.filter(favoriteInstrument => favoriteInstrument.id === instrument.id)
     return isPresent.length > 0;
   }
-  hasGraphLink(instrument: Instrument): boolean{
-    this.favoriteInstruments = this.loadFavoriteInstruments();
-    const found: Instrument[] = this.favoriteInstruments.filter(favoriteInstrument => favoriteInstrument.id === instrument.id)
-    return found[0].graph_link !== null;
-  }
+  // hasGraphLink(instrument: Instrument): boolean{
+  //   this.favoriteInstruments = this.loadFavoriteInstruments();
+  //   const found: Instrument[] = this.favoriteInstruments.filter(favoriteInstrument => favoriteInstrument.id === instrument.id)
+  //   return found[0].graph_link !== null;
+  // }
   prefereFavoriteInstrument(instrument: Instrument): Instrument{
-    return this.favoriteInstruments.filter(favoriteInstrument => favoriteInstrument.id === instrument.id)[0]
+    const favoriteInstruments: Instrument[] = this.localStorageService.get('favorite-instruments');
+    return favoriteInstruments.filter(favoriteInstrument => favoriteInstrument.id === instrument.id)[0]
   }
 }

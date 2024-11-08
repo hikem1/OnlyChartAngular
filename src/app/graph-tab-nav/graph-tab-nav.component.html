@@ -1,7 +1,7 @@
-<button class="d-flex p-0 nav-link border ms-1 til" [ngClass]="{active: instrument.active}" (click)="onActiveTab(instrument)" type="button" role="tab">
-    <i class="bi px-2 py-1" [ngClass]="instrument.favorite ? 'bi-star-fill': 'bi-star'" (click)="onStar(instrument)" ></i>
-    <div class="d-flex align-items-center">
-        <span class="py-1 p pe-2">{{ instrument.name | titlecase }}</span>
-    </div>
-    <i class="px-1 bi bi-x" (click)="onCloseTab(instrument)"></i>
-</button>
+<li class="d-flex rounded p-1" [ngClass]="{active: instrument.active}">
+    <i class="bi" [ngClass]="instrument.favorite ? 'bi-star-fill': 'bi-star'" (click)="onStar()" ></i>
+    <button class="d-flex nav-link mx-2 text-start" (click)="onActiveTab()" type="button">
+        {{ instrument.name | titlecase }}
+    </button>
+    <i class="bi bi-trash-fill" (click)="onCloseTab()"></i>
+</li>

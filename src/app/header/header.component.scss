@@ -1,62 +1,16 @@
 header{
-    z-index: 1;
-    nav{
-        border-bottom: 1px solid rgb(236, 103, 87, 0.2);
-    }
+    z-index: 2;
     img{
         width: auto;
-        height: 50px;
+        height: 60px;
         cursor: pointer;
         animation: scale-down-center 0.2s both;
         &:hover{
             animation: scale-up-center 0.2s both;
         }
     }
-    a{
-        animation: scale-down-center 0.2s both;
-        color: rgb(236, 103, 87) !important;
-        &:hover{
-            font-weight: bold;
-            animation: scale-up-center 0.2s both;
-        }   
-    }
-    [data-bs-toggle]{
-        border: none;
-        i{
-            color: rgb(236, 103, 87);
-        }
-    }
     form{
-        max-width: 300px;
-
-    }
-}
-.active{
-    font-weight: bold;
-    text-shadow: 1px 1px 1px rgb(236, 103, 87, 0.5);
-}
-
-@media (max-width: 992px) {
-    header{
-        img{
-            position: absolute;
-            top: 0px;
-            left: 10px;
-        }
-        a{
-            animation: none;
-            &:hover{
-                animation: none;
-            }   
-        }
-        #navbarSupportedContent{
-            // border-top: 1px solid rgb(236, 103, 87, 0.2);
-            margin: 10px 0 10px 0;
-        }
-        form{
-            width: 100%;
-        }
-
+        width: 500px;
 
     }
 }

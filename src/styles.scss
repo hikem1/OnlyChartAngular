@@ -28,8 +28,8 @@ body{
 th, td{
     max-width: 50px;
     font-size: 0.8rem;
+    background-color: rgba(255, 255, 255, 0.934) !important;
     i{
-        animation: scale-down-center 0.2s both;
      &:hover{
         animation: scale-up-center 0.2s both;
         }
@@ -37,6 +37,9 @@ th, td{
 }
 .fav-col{
     width: 10px;
+}
+.plus-col{
+    text-align: center;
 }
 .bi-plus-square-fill{
     color: rgb(236, 103, 87);

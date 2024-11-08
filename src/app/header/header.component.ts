@@ -1,14 +1,14 @@
 import { NgClass } from '@angular/common';
-import { Component, ElementRef, Injectable, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { NavCollapseService } from '../services/nav-collapse.service';
+
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
-    RouterLink,
-    RouterLinkActive,
     NgClass,
     ReactiveFormsModule
   ],
@@ -16,35 +16,30 @@ import { UserService } from '../services/user.service';
   styleUrl: './header.component.scss'
 })
 
-@Injectable({
-  providedIn: 'root',
-})
-
 export class HeaderComponent{
-  @ViewChild('navbarToggler') navbarToggler!: ElementRef;
-  @ViewChild('navbarContent') navbarContent!: ElementRef;
+
   form: FormGroup = new FormGroup({
     search: new FormControl('')
   });
 
   constructor(
     private router: Router,
-    public userService: UserService
+    public userService: UserService,
+    private navCollapseService: NavCollapseService
   ){
   }
   onLogoClick(): void{
-    this.router.navigateByUrl("");
-    this.onNavClick();
+    this.navCollapseService.toggleCollapse()
   }
   onNavClick(): void {
-    if(this.navbarContent.nativeElement.classList.contains('show')){
-      this.navbarToggler.nativeElement.click();
-    }
+    // if(this.navbarContent.nativeElement.classList.contains('show')){
+    //   this.navbarToggler.nativeElement.click();
+    // }
   }
   onSubmit(){
+    this.navCollapseService.hide()
     const keyword: string = this.form.value.search
     this.router.navigate(["search"], { queryParams: {keyword: keyword} });
-    this.onNavClick();
   }
   onLogoutClick(){
     this.userService.logout()

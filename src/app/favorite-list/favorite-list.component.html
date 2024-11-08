@@ -1,4 +1,4 @@
-<div class="container tilt-in-top">
+<div class="tilt-in-top p-2">
     <table class="table rounded shadow">
         <thead class="rounded">
             <tr class="rounded">
@@ -17,7 +17,7 @@
                         <td class=" text-nowrap overflow-hidden">{{ favorite.name | titlecase}}</td>
                         <td class=" text-nowrap overflow-hidden">{{ favorite.code }}</td>
                         <td class="text-nowrap overflow-hidden">{{ favorite.exchange_place | titlecase}}</td>
-                        <td><i (click)="onPlus(favorite)" class="bi bi-plus-square-fill d-flex justify-content-center py-1"></i></td>
+                        <td class="plus-col"><i (click)="onPlus(favorite)" class="bi bi-plus-square-fill py-1"></i></td>
                     </tr>
                 }
             }
