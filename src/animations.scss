@@ -65,12 +65,13 @@
     animation: scall-in 1.5s both;
 }
 @keyframes scale-up-center {
-    0% {
-        transform: scale(1);
+    100%{
+        transform: scale(1.03);
     }
-    100% {
-        transform: scale(1.2);
-        text-shadow: 1px 1px 1px rgb(236, 103, 87, 0.5);
+}
+.scale-up-center{
+    &:hover{
+        animation: scale-up-center 0.2s both;
     }
 }
 @keyframes scale-down-center {
