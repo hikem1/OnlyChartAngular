@@ -1,4 +1,4 @@
-<div class="d-flex px-3 py-2 my-1 bg-light border rounded content-card justify-content-between shadow scale-up-center">
+<div [ngClass]="{active: instrument.active}" class="d-flex px-3 py-2 my-1 bg-light border rounded content-card justify-content-between shadow scale-up-center">
     <div class="img-card position-relative d-flex align-items-center">
         <img src="https://cdn.zonebourse.com/static/instruments-squared-{{instrument.id}}" alt="">
         <app-star [instrument]="instrument" [optionMethod]="optionMethod"></app-star>

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Instrument } from '../models/instrument';
-import { TitleCasePipe } from '@angular/common';
+import { NgClass, TitleCasePipe } from '@angular/common';
 import { StarComponent } from '../star/star.component';
 import { PlusComponent } from '../plus/plus.component';
 import { Router } from '@angular/router';
@@ -12,6 +12,7 @@ import { NavCollapseService } from '../services/nav-collapse.service';
   selector: 'app-instrument-card',
   standalone: true,
   imports: [
+    NgClass,
     TitleCasePipe,
     StarComponent,
     PlusComponent,
@@ -36,7 +37,6 @@ export class InstrumentCardComponent {
     if(this.cardOption === "remove"){
       this.instrumentService.setActiveInstrument(this.instrument);
       this.navCollapseService.hide();
-      this.router.navigateByUrl("/")
     }
   }
 }

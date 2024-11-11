@@ -1,25 +1,29 @@
     <nav [ngClass]='isCollapsed ? "hide" : " show"'>
         <div class="content">
-            <div class="d-flex justify-content-between bb pt-3 px-3">
-                <h5 class="fw-bold text-nowrap">Navigate</h5>
+            <div class="d-flex justify-content-between bb pt-3 mx-3">
+                <h4 class="fw-bold text-nowrap">Navigate</h4>
                 <i (click)="onCloseClick()" class="bi bi-x-lg"></i>
             </div>
-            <ul class="navbar-nav ps-4 mt-3 mb-5">
-                <li class="nav-item">
-                    <a (click)="onNavClick()" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link active text-nowrap" aria-current="page">Home</a>
+            <ul class="navbar-nav ps-3 mt-3 mb-5">
+                <li class="nav-item d-flex align-items-center">
+                    <i class="bi bi-house-fill pe-3"></i>
+                    <a (click)="onNavClick()" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link active text-nowrap scale-up-center" aria-current="page">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a (click)="onNavClick()" routerLink="favorites" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link active text-nowrap" aria-current="page">Favorites</a>
+                <li class="nav-item d-flex align-items-center">
+                    <i class="bi bi-star-fill pe-3"></i>
+                    <a (click)="onNavClick()" routerLink="favorites" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link active text-nowrap scale-up-center" aria-current="page">Favorites</a>
                 </li>
-                <li [ngClass]='{"d-none" : userService.getUser() && userService.getAuthStatus()}' class="d-inline-block nav-item">
-                    <a (click)="onNavClick()" routerLink="sign-in" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link active text-nowrap" aria-current="page">Sign in</a>
+                <li [ngClass]='{"d-none" : userService.getUser() && userService.getAuthStatus()}' class="d-inline-block nav-item d-flex align-items-center">
+                    <i class="bi bi-person-fill pe-3"></i>
+                    <a (click)="onNavClick()" routerLink="sign-in" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link active text-nowrap scale-up-center" aria-current="page">Sign in</a>
                 </li>
-                <li [ngClass]='{"d-none" : !userService.getUser() || !userService.getAuthStatus()}' class="d-inline-block nav-item">
-                    <a (click)="onNavClick()" routerLink="sign-in" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link active text-nowrap" aria-current="page">Logout</a>
+                <li [ngClass]='{"d-none" : !userService.getUser() || !userService.getAuthStatus()}' class="d-inline-block nav-item d-flex align-items-center">
+                    <i class="bi bi-person-fill pe-3"></i>
+                    <a (click)="onNavClick()" routerLink="sign-in" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link active text-nowrap scale-up-center" aria-current="page">Logout</a>
                 </li>
             </ul>
-            <div class="bb px-3">
-                <h5 class="fw-bold text-nowrap">Instruments</h5>
+            <div class="bb mx-3">
+                <h4 class="fw-bold text-nowrap">Instruments</h4>
             </div>
             <ul class="m-0 px-3 py-3">
                 @for (instrument of instruments; track $index) {

@@ -42,7 +42,6 @@ export class InstrumentService {
   addInstrument(instrument: Instrument){
     this.instruments = this.localStorageService.get('home-instruments');
     this.instruments.push(instrument);
-    this.setActiveInstrument(instrument);
     this.setFavoritesInstruments();
     this.localStorageService.set("home-instruments", this.instruments);
     this.instrumentsSubject.next(this.instruments);

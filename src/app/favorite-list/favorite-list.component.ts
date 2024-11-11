@@ -28,8 +28,6 @@ export class FavoriteListComponent implements OnInit{
   ){}
   ngOnInit(): void {
     this.favoriteInstrumentsService.favoriteInstruments$.subscribe(instruments => this.favoriteInstruments = instruments);
-    this.cardOption = "plus"
-    this.optionMethod = "favorite"
   }
   onStar(instrument: Instrument): void{
     this.favoriteInstrumentsService.removeInstrument(instrument);
@@ -38,6 +36,9 @@ export class FavoriteListComponent implements OnInit{
   onPlus(instrument: Instrument){
     if(!this.instrumentService.isPresent(instrument)){
       this.instrumentService.addInstrument(instrument);
+      this.instrumentService.setActiveInstrument(instrument)
+    }else{
+      this.instrumentService.setActiveInstrument(instrument)
     }
   }
 }

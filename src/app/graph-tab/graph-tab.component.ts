@@ -4,6 +4,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { NgClass } from '@angular/common';
 import { LoaderComponent } from '../loader/loader.component';
 import { InstrumentService } from '../services/instrument.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-graph-tab',
@@ -23,6 +24,7 @@ export class GraphTabComponent implements OnInit{
   constructor(
     private instrumentService: InstrumentService,
     private domSanitizer: DomSanitizer,
+    private router: Router
   ){
   }
   ngOnInit(): void {

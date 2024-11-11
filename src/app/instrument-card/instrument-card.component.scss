@@ -9,6 +9,7 @@
     }
     .spec-card{
         width: 70%;
+        max-width: 200px;
         cursor: pointer;
     }
     .code-card, .place-card{
@@ -17,8 +18,10 @@
     .place-card{
         font-style: italic;
     }
-
 }
+// .active{
+//     border: 2px solid #76cf62 !important;
+// }
 
 @media (max-width: 600px) {
     .content-card{

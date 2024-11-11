@@ -31,12 +31,13 @@ export class PlusComponent {
       this.onPlusSearch();
     }
     this.navCollapseService.hide();
-    this.router.navigateByUrl("/");
   }
   onPlusFavorite(){
     if(!this.instrumentService.isPresent(this.instrument)){
       this.instrumentService.addInstrument(this.instrument);
     }
+    this.instrumentService.setActiveInstrument(this.instrument)
+    this.router.navigateByUrl("/")
   }
   onPlusSearch(){
     if(!this.instrumentService.isPresent(this.instrument)){
