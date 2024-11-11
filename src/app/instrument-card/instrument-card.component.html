@@ -1,0 +1,18 @@
+<div class="d-flex px-3 py-2 my-1 bg-light border rounded content-card justify-content-between shadow scale-up-center">
+    <div class="img-card position-relative d-flex align-items-center">
+        <img src="https://cdn.zonebourse.com/static/instruments-squared-{{instrument.id}}" alt="">
+        <app-star [instrument]="instrument" [optionMethod]="optionMethod"></app-star>
+    </div>
+    <div (click)="onActiveTab()" class="spec-card d-flex flex-column">
+        <span class="name-card fw-bold text-nowrap overflow-hidden">{{ instrument.name | titlecase}}</span>
+        <span class="code-card text-nowrap overflow-hidden">{{ instrument.code }}</span>
+        <span class="place-card text-nowrap overflow-hidden">{{ instrument.exchange_place | titlecase}}</span>
+    </div>
+    <div class="plus-card d-flex align-items-center">
+        @if (cardOption === "remove") {
+            <app-trash [instrument]="instrument" ></app-trash>
+        }@else if(cardOption === "plus"){
+            <app-plus [instrument]="instrument" [optionMethod]="optionMethod"></app-plus>
+        }
+    </div>
+</div>

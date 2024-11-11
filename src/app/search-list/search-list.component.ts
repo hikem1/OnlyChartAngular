@@ -5,19 +5,18 @@ import { Instrument } from '../models/instrument';
 import { NgClass, NgIf, TitleCasePipe } from '@angular/common';
 import { FavoriteInstrumentsService } from '../services/favorite-instruments.service';
 import { InstrumentService } from '../services/instrument.service';
-import { LoaderComponent } from '../loader/loader.component';
 import { take } from 'rxjs';
 import { ErrorService } from '../services/error.service';
-import { LoaderService } from '../services/loader.service';
+import { InstrumentCardComponent } from '../instrument-card/instrument-card.component';
 
 @Component({
   selector: 'app-search-list',
   standalone: true,
   imports: [
-    LoaderComponent,
     NgClass,
     NgIf,
-    TitleCasePipe
+    TitleCasePipe,
+    InstrumentCardComponent
   ],
   templateUrl: './search-list.component.html',
   styleUrl: './search-list.component.scss'
@@ -26,7 +25,8 @@ import { LoaderService } from '../services/loader.service';
 export class SearchListComponent implements OnInit{
   keyword!: string;
   instruments: Instrument[] = [];
-  isLoading: boolean = false;
+  cardOption: string = "plus";
+  optionMethod: string = "search";
 
   constructor(
     private router: Router,
@@ -47,6 +47,8 @@ export class SearchListComponent implements OnInit{
     })
   }
   ngOnInit(): void {
+    this.cardOption = "plus"
+    this.optionMethod = "search"
     this.route.queryParams.subscribe((params)=>{
       this.keyword = params["keyword"];
       this.searchInstrumentsService.search(this.keyword)

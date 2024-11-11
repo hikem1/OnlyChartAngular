@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FavoriteInstrumentsService } from '../services/favorite-instruments.service';
 import { NgClass, TitleCasePipe } from '@angular/common';
 import { InstrumentService } from '../services/instrument.service';
+import { InstrumentCardComponent } from '../instrument-card/instrument-card.component';
 
 @Component({
   selector: 'app-favorite-list',
@@ -10,6 +11,7 @@ import { InstrumentService } from '../services/instrument.service';
   imports: [
     NgClass,
     TitleCasePipe,
+    InstrumentCardComponent
   ],
   templateUrl: './favorite-list.component.html',
   styleUrl: './favorite-list.component.scss'
@@ -17,13 +19,17 @@ import { InstrumentService } from '../services/instrument.service';
 
 export class FavoriteListComponent implements OnInit{
   favoriteInstruments: Instrument[] = []
-
+  cardOption: string = "plus"; 
+  optionMethod: string = "favorite";
+  
   constructor(
     private favoriteInstrumentsService: FavoriteInstrumentsService,
     private instrumentService: InstrumentService,
   ){}
   ngOnInit(): void {
     this.favoriteInstrumentsService.favoriteInstruments$.subscribe(instruments => this.favoriteInstruments = instruments);
+    this.cardOption = "plus"
+    this.optionMethod = "favorite"
   }
   onStar(instrument: Instrument): void{
     this.favoriteInstrumentsService.removeInstrument(instrument);

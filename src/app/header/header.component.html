@@ -1,6 +1,6 @@
 <header class="mb-3 fixed-top shadow bg-light">
-    <div class="d-flex justify-content-between px-4 bb">
-        <img (click)="onLogoClick()" src="assets/image/logo.png" alt="only-chart-logo">
+    <div class="d-flex align-items-center justify-content-between px-4 bb">
+        <img class="pb-1" (click)="onLogoClick()" src="assets/image/logo.png" alt="only-chart-logo">
         <form [formGroup]="form" (ngSubmit)="onSubmit()" class="d-flex py-3">
             <input formControlName="search" class="form-control form-control-sm me-2" type="search" placeholder="Search instrument..." aria-label="Search">
             <button class="btn btn-outline-success btn-sm" type="submit">Search</button>

@@ -9,11 +9,13 @@ import { GraphTabComponent } from '../graph-tab/graph-tab.component';
 import { FavoriteInstrumentsService } from '../services/favorite-instruments.service';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { NavCollapseService } from '../services/nav-collapse.service';
+import { InstrumentCardComponent } from '../instrument-card/instrument-card.component';
 
 @Component({
   selector: 'app-nav',
   standalone: true,
   imports: [
+    InstrumentCardComponent,
     GraphTabNavComponent,
     GraphTabComponent,
     RouterLink,
@@ -27,6 +29,8 @@ import { NavCollapseService } from '../services/nav-collapse.service';
 export class NavComponent {
   instruments:  Instrument[] = [];
   isCollapsed: boolean = true;
+  cardOption: string = "remove";
+  optionMethod: string = "favorite";
 
   constructor(
     private router: Router,
@@ -38,6 +42,8 @@ export class NavComponent {
     this.navCollapseService.isCollapsed$.subscribe(isCollapsed => this.isCollapsed = isCollapsed)
   }
   ngOnInit(): void {
+    this.cardOption = "remove"
+    this.optionMethod = "favorite"
     this.instrumentService.instruments$.subscribe(instruments => {this.instruments = instruments})
     this.favoriteInstrumentsService.favoriteInstruments$.subscribe(instruments => {
       this.instruments.forEach(instrument => {
