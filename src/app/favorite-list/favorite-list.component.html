@@ -1,7 +1,9 @@
-<div class="tilt-in-top p-2 d-flex flex-wrap justify-content-evenly">
-    @for (favorite of favoriteInstruments; track favorite.id) {
-        @if (favorite.favorite) {
-            <app-instrument-card [cardOption]="cardOption" [optionMethod]="optionMethod" [instrument]="favorite"></app-instrument-card>
+<div class="content">
+    <div class="tilt-in-top p-2 d-flex flex-wrap justify-content-evenly">
+        @for (favorite of favoriteInstruments; track favorite.id) {
+            @if (favorite.favorite) {
+                <app-instrument-card [cardOption]="cardOption" [optionMethod]="optionMethod" [instrument]="favorite"></app-instrument-card>
+            }
         }
-    }
+    </div>
 </div>

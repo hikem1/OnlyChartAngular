@@ -1,6 +1,9 @@
 .content-card{
-    width: 350px;
+    color: rgb(103, 103, 103);
+    background-color: rgba(248, 249, 250, 0.875);
+    // width: 350px;
     min-width: 350px;
+    max-width: 450px;
     transition-duration: 0.2s;
     .img-card{
         img{
@@ -19,9 +22,9 @@
         font-style: italic;
     }
 }
-// .active{
-//     border: 2px solid #76cf62 !important;
-// }
+.active{
+    border: 2px solid #76cf62 !important;
+}
 
 @media (max-width: 600px) {
     .content-card{

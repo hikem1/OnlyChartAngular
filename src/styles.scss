@@ -7,9 +7,15 @@
     font-family: $quicksand;
 }
 body{
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+    position: relative;
+    // display: flex;
+    // flex-flow: column;
+    // height: 100%;
+}
+.bg-wave{
+    background-image: url("../public/assets/image/wave.svg");
+    background-repeat: no-repeat;
+    background-position: bottom;
 }
 .fullHeight{
     display: flex;
@@ -17,7 +23,7 @@ body{
     flex: 1
 }
 .bb{
-    border-bottom: 1px solid rgb(236, 103, 87, 0.2);
+    border-bottom: 4px solid rgba(236, 102, 87, 0.15);
 }
 .bi{
     cursor: pointer;

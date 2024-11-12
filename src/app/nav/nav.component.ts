@@ -56,9 +56,12 @@ export class NavComponent {
     })
   }
   onNavClick(){
-    this.navCollapseService.toggleCollapse();
+    this.navCollapseService.hide();
   }
   onCloseClick(){
-    this.navCollapseService.toggleCollapse();
+    this.navCollapseService.hide();
+  }
+  onBackgroundClick(){
+    this.navCollapseService.hide();
   }
 }

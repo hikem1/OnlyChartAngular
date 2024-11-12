@@ -1,28 +1,30 @@
-@if (!userService.getAuthStatus()){
+<div class="content">
+    @if (!userService.getAuthStatus()){
     <div id="sign-form" class="border p-4 rounded rounded-3 shadow tilt-in-top bg-white">
         <div class="bb pb-2 d-flex">
             <h4 class="me-2 fw-bold m-0">Sign in </h4>
-            <span class="fst-italic d-flex align-items-end">(to zonebourse site)</span>
+                <span class="fst-italic d-flex align-items-end">(to zonebourse site)</span>
+            </div>
+            <div class="modal-body mt-4">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="mb-4">
+                        <label for="email" class="form-label">Email address :</label>
+                        <input formControlName="email" name="email" type="email" class="form-control form-control-sm" id="email" aria-describedby="emailHelp" required="required"/>
+                    </div> 
+                    <div class="mb-4">
+                        <label for="password" class="form-label">Password :</label>
+                        <input formControlName="password" name="password" type="password" class="form-control form-control-sm" id="password" required="required"/>
+                    </div>
+                    <div>
+                        <p #errorMessage class="text-danger">{{ !userService.getAuthStatus() && userService.getMessage() !== "" ? userService.getMessage() : ""}}</p>
+                    </div>
+                    <div class="d-flex flex-row-reverse mt-4">
+                        <button type="submit" class="btn btn-sm btn-outline-primary">Sign in</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="modal-body mt-4">
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                <div class="mb-4">
-                    <label for="email" class="form-label">Email address :</label>
-                    <input formControlName="email" name="email" type="email" class="form-control form-control-sm" id="email" aria-describedby="emailHelp" required="required"/>
-                </div> 
-                <div class="mb-4">
-                    <label for="password" class="form-label">Password :</label>
-                    <input formControlName="password" name="password" type="password" class="form-control form-control-sm" id="password" required="required"/>
-                </div>
-                <div>
-                    <p #errorMessage class="text-danger">{{ !userService.getAuthStatus() && userService.getMessage() !== "" ? userService.getMessage() : ""}}</p>
-                </div>
-                <div class="d-flex flex-row-reverse mt-4">
-                    <button type="submit" class="btn btn-sm btn-outline-primary">Sign in</button>
-                </div>
-            </form>
-        </div>
-    </div>
-}@else{
-    <h5 class="mt-5">{{ userService.getMessage() }}</h5>
-}
+    }@else{
+            <h5 class="mt-5">{{ userService.getMessage() }}</h5>
+    }
+</div>

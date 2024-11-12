@@ -48,6 +48,7 @@ export class PlusComponent {
           next: (graph_link) => {
             this.instrument.graph_link = graph_link
             this.instrumentService.addInstrument(this.instrument);
+            this.instrumentService.setActiveInstrument(this.instrument)
             this.router.navigateByUrl("/")
           },
           error: (error)=> {
