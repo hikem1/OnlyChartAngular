@@ -35,7 +35,10 @@ export class InstrumentCardComponent {
   }
   onActiveTab(): void{
     if(this.cardOption === "remove"){
+      this.router.navigateByUrl("/")
       this.instrumentService.setActiveInstrument(this.instrument);
+      this.instrumentService.saveInstruments();
+      this.instrumentService.updateInstruments();
       this.navCollapseService.hide();
     }
   }

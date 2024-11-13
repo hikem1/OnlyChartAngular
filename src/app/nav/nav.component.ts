@@ -33,26 +33,15 @@ export class NavComponent {
   optionMethod: string = "favorite";
 
   constructor(
-    private router: Router,
     public userService: UserService,
     private instrumentService: InstrumentService,
-    private favoriteInstrumentsService: FavoriteInstrumentsService, 
     private navCollapseService: NavCollapseService
   ){
     this.navCollapseService.isCollapsed$.subscribe(isCollapsed => this.isCollapsed = isCollapsed)
   }
   ngOnInit(): void {
-    this.cardOption = "remove"
-    this.optionMethod = "favorite"
-    this.instrumentService.instruments$.subscribe(instruments => {this.instruments = instruments})
-    this.favoriteInstrumentsService.favoriteInstruments$.subscribe(instruments => {
-      this.instruments.forEach(instrument => {
-        if(this.favoriteInstrumentsService.isFavorite(instrument)){
-          instrument.favorite = true;
-        }else{
-          instrument.favorite = false;
-        }
-      })
+    this.instrumentService.instruments$.subscribe(instruments => {
+      this.instruments = instruments.filter(instrument => instrument.selected)
     })
   }
   onNavClick(){

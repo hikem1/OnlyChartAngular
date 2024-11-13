@@ -23,22 +23,25 @@ export class FavoriteListComponent implements OnInit{
   optionMethod: string = "favorite";
   
   constructor(
-    private favoriteInstrumentsService: FavoriteInstrumentsService,
+    // private favoriteInstrumentsService: FavoriteInstrumentsService,
     private instrumentService: InstrumentService,
   ){}
   ngOnInit(): void {
-    this.favoriteInstrumentsService.favoriteInstruments$.subscribe(instruments => this.favoriteInstruments = instruments);
+    this.instrumentService.instruments$.subscribe(instruments =>{
+      this.favoriteInstruments = instruments.filter(instrument => instrument.favorite)
+    })
+      
   }
-  onStar(instrument: Instrument): void{
-    this.favoriteInstrumentsService.removeInstrument(instrument);
-    this.instrumentService.setFavoritesInstruments();
-  }
-  onPlus(instrument: Instrument){
-    if(!this.instrumentService.isPresent(instrument)){
-      this.instrumentService.addInstrument(instrument);
-      this.instrumentService.setActiveInstrument(instrument)
-    }else{
-      this.instrumentService.setActiveInstrument(instrument)
-    }
-  }
+  // onStar(instrument: Instrument): void{
+  //   this.favoriteInstrumentsService.removeInstrument(instrument);
+  //   this.instrumentService.setFavoritesInstruments();
+  // }
+  // onPlus(instrument: Instrument){
+  //   if(!this.instrumentService.isPresent(instrument)){
+  //     this.instrumentService.addInstrument(instrument);
+  //     this.instrumentService.setActiveInstrument(instrument)
+  //   }else{
+  //     this.instrumentService.setActiveInstrument(instrument)
+  //   }
+  // }
 }

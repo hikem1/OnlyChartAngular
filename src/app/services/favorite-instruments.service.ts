@@ -17,18 +17,12 @@ export class FavoriteInstrumentsService {
   }
   toggleInstrument(instrument: Instrument): void{
     if(!this.isFavorite(instrument)){
-      this.addInstrument(instrument);
+      // this.addInstrument(instrument);
     }else{
       this.removeInstrument(instrument);
     }
   }
-  addInstrument(instrument: Instrument): void{
-    const favoriteInstruments: Instrument[] = this.localStorageService.get('favorite-instruments');
-    instrument.favorite = true;
-    favoriteInstruments.push(instrument);
-    this.localStorageService.set("favorite-instruments", favoriteInstruments)
-    this.favoriteInstrumentsSubject.next(favoriteInstruments)
-  }
+
   removeInstrument(instrument: Instrument): void {
     let favoriteInstruments: Instrument[] = this.localStorageService.get('favorite-instruments');
     instrument.favorite = false;

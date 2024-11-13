@@ -5,8 +5,10 @@ export interface InstrumentInterface{
     graph_link: string;
     link: string;
     exchange_place: string;
-    active?: boolean;
-    favorite?: boolean;
+    active: boolean;
+    favorite: boolean;
+    selected: boolean;
+    add_favorite_date: Date;
 }
 
 export class Instrument implements InstrumentInterface{
@@ -16,12 +18,13 @@ export class Instrument implements InstrumentInterface{
     graph_link: string;
     link: string;
     exchange_place: string
-    active?: boolean;
-    favorite?: boolean;
-    add_favorite_date?: Date;
+    active: boolean;
+    favorite: boolean;
+    selected: boolean;
+    add_favorite_date: Date;
 
     constructor(instrumentJson: InstrumentInterface){
-        this.id = instrumentJson.id;
+        this.id = Number(instrumentJson.id);
         this.name = instrumentJson.name;
         this.code = instrumentJson.code;
         this.graph_link = instrumentJson.graph_link;
@@ -29,6 +32,7 @@ export class Instrument implements InstrumentInterface{
         this.exchange_place = instrumentJson.exchange_place;
         this.active = false;
         this.favorite = false;
+        this.selected = false;
         this.add_favorite_date = new Date();
     }
 }

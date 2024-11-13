@@ -35,8 +35,11 @@ export class PlusComponent {
   onPlusFavorite(){
     if(!this.instrumentService.isPresent(this.instrument)){
       this.instrumentService.addInstrument(this.instrument);
+    }else{
+      this.instrumentService.setActiveInstrument(this.instrument);
+      this.instrumentService.saveInstruments();
+      this.instrumentService.updateInstruments();
     }
-    this.instrumentService.setActiveInstrument(this.instrument)
     this.router.navigateByUrl("/")
   }
   onPlusSearch(){
@@ -48,7 +51,6 @@ export class PlusComponent {
           next: (graph_link) => {
             this.instrument.graph_link = graph_link
             this.instrumentService.addInstrument(this.instrument);
-            this.instrumentService.setActiveInstrument(this.instrument)
             this.router.navigateByUrl("/")
           },
           error: (error)=> {

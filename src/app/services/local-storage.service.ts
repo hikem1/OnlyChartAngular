@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { Instrument } from '../models/instrument';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { DOCUMENT } from '@angular/common';
 export class LocalStorageService {
   private readonly localStorage = inject(DOCUMENT)?.defaultView?.localStorage;
 
-  get(key: string): any {
+  get(key: string): Instrument[] {
     const item = this.localStorage?.getItem(key);
     if (!item) {
       return [];

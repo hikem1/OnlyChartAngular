@@ -25,52 +25,85 @@ export class InstrumentService {
     private errorService: ErrorService,
     private http: HttpClient,
   ){
-    this.instruments = this.localStorageService.get('home-instruments')
-    this.setFavoritesInstruments();
-    this.localStorageService.set("home-instruments", this.instruments)
-    this.instrumentsSubject.next(this.instruments)
+    this.getInstruments();
+    this.updateInstruments();
   }
-  setFavoritesInstruments(){
-    this.instruments.forEach(instrument => {
-      if(this.favoriteInstrumentsService.isFavorite(instrument)){
-        instrument.favorite = true;
-      }else{
-        instrument.favorite = false;
-      }
-    })
-  }
+  // setFavoritesInstruments(){
+  //   this.instruments.forEach(instrument => {
+  //     if(this.favoriteInstrumentsService.isFavorite(instrument)){
+  //       instrument.favorite = true;
+  //     }else{
+  //       instrument.favorite = false;
+  //     }
+  //   })
+  // }
   addInstrument(instrument: Instrument){
-    this.instruments = this.localStorageService.get('home-instruments');
+    this.getInstruments();
     this.instruments.push(instrument);
-    this.setFavoritesInstruments();
-    this.localStorageService.set("home-instruments", this.instruments);
+    this.setActiveInstrument(instrument);
+    this.saveInstruments();
+    this.updateInstruments();
+  }
+  updateInstruments(){
     this.instrumentsSubject.next(this.instruments);
+  }
+  getInstruments(){
+    this.instruments = this.localStorageService.get('instruments');
+  }
+  saveInstruments(){
+    this.localStorageService.set("instruments", this.instruments);
+  }
+  toggleFavoriteInstrument(selectedInstrument: Instrument): void{
+    this.getInstruments();
+    if(selectedInstrument.selected){
+      this.instruments.forEach(instrument => {
+        if(selectedInstrument.id === instrument.id){
+          instrument.favorite = !instrument.favorite;
+        }
+      })
+    }else{
+      this.instruments = this.instruments.filter(i => i.id !== selectedInstrument.id)
+    }
+    this.saveInstruments();
+    this.updateInstruments();
   }
   removeInstrument(instrument: Instrument): void{
-    this.instruments = this.localStorageService.get('home-instruments');
-    this.instruments = this.instruments.filter(instr => instr.id !== instrument.id);
-    this.setFavoritesInstruments();
-    this.localStorageService.set("home-instruments", this.instruments);
-    this.instrumentsSubject.next(this.instruments);
+    this.getInstruments();
+    if(instrument.favorite){
+      this.instruments.forEach(instr => {
+        if(instrument.id === instr.id){
+          instr.selected = false;
+          instr.active = false;
+        }
+      })
+    }else{
+      this.instruments = this.instruments.filter(i => i.id !== instrument.id)
+    }
+    this.saveInstruments();
+    this.updateInstruments();
     this.instrumentSubject.next(null);
   }
   setActiveInstrument(activeInstrument: Instrument): void{
     this.instruments.forEach(instrument => {
       if(activeInstrument.id !== instrument.id){
-        instrument.active = false
+        instrument.active = false;
       }else{
-        instrument.active = true
-      }
+        instrument.active = true;
+        instrument.selected = true;
+        }
     })
     this.instrumentSubject.next(activeInstrument);
   }
   isPresent(instr: Instrument): boolean{
-    this.instruments = this.localStorageService.get('home-instruments');
+    this.getInstruments()
     const isPresent = this.instruments.filter(instrument => instr.id === instrument.id)
     return isPresent.length > 0;
   }
   findGraphLinkInstrument(instrument: Instrument){
     const headers = new HttpHeaders()
     return this.http.get(`${this.apiUrl}/graph-link?id=${instrument.id}&link=${instrument.link}`, { headers, responseType: 'text'})
+  }
+  search(keyword: string){
+    return this.http.get<Instrument[]>(`${this.apiUrl}/search/` + keyword);
   }
 }

@@ -1,5 +1,5 @@
 nav{
-    // height: 100%;
+    min-height: 100vh;
     position: absolute;
     z-index: 2;
     color: rgb(103, 103, 103);
@@ -28,8 +28,10 @@ nav{
     .navbar-nav{
         font-size: 1rem;
         li:hover{
-            background-color: rgba(103, 103, 103, 0.057);
-            transition-duration: 0.3s;
+            background-color: rgba(216, 144, 130, 0.1);
+            transition-duration: 0.05s;
+            color: rgb(103, 103, 103);
+            cursor: pointer;
         }
         i{
             font-size: 1rem;
@@ -52,6 +54,9 @@ nav{
 }
 .active{
     font-weight: bolder;
+    background-color: rgba(216, 144, 130, 0.6);
+    transition-duration: 0.05s;
+    color: white;
 }
 @media (max-width: 500px) {
     nav{

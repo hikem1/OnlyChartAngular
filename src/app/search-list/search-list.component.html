@@ -1,7 +1,7 @@
 <div class="content">
-    @if (instruments.length) {
+    @if (matchInstruments.length) {
     <div class="tilt-in-top p-2 d-flex flex-wrap justify-content-evenly">
-        @for (instrument of instruments; track instrument.id) {
+        @for (instrument of matchInstruments; track instrument.id) {
             <app-instrument-card [cardOption]="cardOption" [optionMethod]="optionMethod" [instrument]="instrument"></app-instrument-card>
         }
     </div>

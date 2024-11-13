@@ -34,17 +34,17 @@ export class StarComponent {
       }
     }
     onStarFavorite(){
-      this.favoriteInstrumentsService.toggleInstrument(this.instrument);
-      this.instrumentService.setFavoritesInstruments();
+      this.instrumentService.toggleFavoriteInstrument(this.instrument);
     }
     onStarSearch(){
-      if(!this.favoriteInstrumentsService.isFavorite(this.instrument)){
+      if(!this.instrument.favorite){
         this.instrumentService.findGraphLinkInstrument(this.instrument)
         .pipe(take(1))
         .subscribe({
           next: (graph_link) => {
             this.instrument.graph_link = graph_link
-            this.favoriteInstrumentsService.addInstrument(this.instrument);
+            this.instrumentService.addInstrument(this.instrument);
+            this.instrumentService.toggleFavoriteInstrument(this.instrument);
             this.router.navigateByUrl("favorites")
           },
           error: (error)=> {
@@ -52,7 +52,7 @@ export class StarComponent {
           }
         });
       }else{
-        this.favoriteInstrumentsService.removeInstrument(this.instrument);
+        this.instrumentService.toggleFavoriteInstrument(this.instrument);
       }
     }
 }
